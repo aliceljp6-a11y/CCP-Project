@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recology Transfer Station — Virtual Tour | Riley the Recology Ranger</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Progress dashboard (hidden on landing) -->
+  <header class="dashboard" id="dashboard" aria-hidden="true">
+    <div class="dashboard-inner">
+      <div class="progress-strip" aria-label="Tour progress">
+        <button type="button" class="zone-dot" data-zone="1" aria-label="Zone 1 Receiving" title="Receiving"></button>
+        <span class="progress-line"></span>
+        <button type="button" class="zone-dot" data-zone="2" aria-label="Zone 2 Sorting" title="Sorting"></button>
+        <span class="progress-line"></span>
+        <button type="button" class="zone-dot" data-zone="3" aria-label="Zone 3 Recycling" title="Recycling"></button>
+        <span class="progress-line"></span>
+        <button type="button" class="zone-dot" data-zone="4" aria-label="Zone 4 Compost" title="Compost"></button>
+        <span class="progress-line"></span>
+        <button type="button" class="zone-dot" data-zone="5" aria-label="Zone 5 Landfill" title="Landfill"></button>
+        <span class="progress-line"></span>
+        <button type="button" class="zone-dot" data-zone="6" aria-label="Zone 6 Your Impact" title="Your Impact"></button>
+      </div>
+      <div class="dashboard-meta">
+        <span class="points" id="pointsDisplay">0 pts</span>
+        <div class="progress-bar-wrap">
+          <span class="progress-label" id="progressLabel">0 of 6 zones</span>
+          <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="6">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+      </div>
+      <div class="badges" id="badges" aria-label="Badges earned"></div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Landing -->
+    <section class="zone landing active" id="zone-landing" data-zone="0">
+      <div class="zone-bg landing-bg"></div>
+      <div class="zone-content">
+        <h1>Recology San Francisco<br>Transfer Station</h1>
+        <p class="tagline">Virtual tour for 4th grade rangers</p>
+        <div class="riley-block riley-landing">
+          <div class="riley-avatar" aria-hidden="true"></div>
+          <div class="riley-speech">
+            <p>Hey! I'm <strong>Riley</strong>, your Recology Ranger. Today we're going to explore where San Francisco's trash goes—and you'll get to make sorting decisions. Ready?</p>
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary btn-start" id="btnStartTour">Start the tour</button>
+      </div>
+    </section>
+
+    <!-- Zone 1: Welcome & Receiving -->
+    <section class="zone" id="zone-1" data-zone="1">
+      <div class="zone-bg zone1-bg"></div>
+      <div class="zone-content">
+        <h2>Welcome & Receiving Area</h2>
+        <div class="riley-block">
+          <div class="riley-avatar" aria-hidden="true"></div>
+          <div class="riley-speech" id="riley-speech-1">
+            <p>This is where trucks bring San Francisco's waste. Click the truck and the scale to see what happens!</p>
+          </div>
+        </div>
+        <div class="activity-receiving">
+          <button type="button" class="receiving-item" id="btnTruck" aria-label="See a truck arrive">
+            <span class="icon">🚛</span>
+            <span class="label">See a truck arrive</span>
+          </button>
+          <button type="button" class="receiving-item" id="btnScale" aria-label="Weigh in">
+            <span class="icon">⚖️</span>
+            <span class="label">Weigh in</span>
+            <span class="scale-value" id="scaleValue"></span>
+          </button>
+        </div>
+        <nav class="zone-nav">
+          <button type="button" class="btn btn-primary" id="zone1Next">Start the tour →</button>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Zone 2: Sorting Lines -->
+    <section class="zone" id="zone-2" data-zone="2">
+      <div class="zone-bg zone2-bg"></div>
+      <div class="zone-content">
+        <h2>Sorting Lines</h2>
+        <div class="riley-block">
+          <div class="riley-avatar" aria-hidden="true"></div>
+          <div class="riley-speech" id="riley-speech-2">
+            <p>Watch the conveyor and click items to learn where they go!</p>
+          </div>
+        </div>
+        <div class="conveyor-activity">
+          <button type="button" class="conveyor-btn" id="btnConveyor">Watch the line</button>
+          <div class="conveyor-items" id="conveyorItems">
+            <button type="button" class="conveyor-item" data-dest="recycle" data-msg="Plastic bottles go in the blue recycling bin so they can become new products!">🥤 Bottle</button>
+            <button type="button" class="conveyor-item" data-dest="compost" data-msg="Banana peels go in the green compost bin—they turn into soil!">🍌 Banana peel</button>
+            <button type="button" class="conveyor-item" data-dest="landfill" data-msg="Chip bags often can't be recycled in SF—they go to landfill. Choosing snacks with less packaging helps!">🥫 Chip bag</button>
+          </div>
+        </div>
+        <nav class="zone-nav">
+          <button type="button" class="btn btn-secondary" data-back="1">← Back</button>
+          <button type="button" class="btn btn-primary btn-next" data-next="3">Next →</button>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Zone 3: Recycling Bays + Sort Challenge 1 -->
+    <section class="zone" id="zone-3" data-zone="3">
+      <div class="zone-bg zone3-bg"></div>
+      <div class="zone-content">
+        <h2>Recycling Bays</h2>
+        <div class="riley-block">
+          <div class="riley-avatar" aria-hidden="true"></div>
+          <div class="riley-speech" id="riley-speech-3">
+            <p>Drag each item to the correct bin: Recycling (blue), Compost (green), or Landfill (gray).</p>
+          </div>
+        </div>
+        <div class="challenge-wrap" id="challenge1Wrap">
+          <div class="challenge-items" id="challenge1Items"></div>
+          <div class="bins" id="challenge1Bins">
+            <div class="bin bin-recycle" data-bin="recycle" role="button" tabindex="0" aria-label="Recycling bin"><span class="bin-icon">♻</span><span class="bin-label">Recycling</span></div>
+            <div class="bin bin-compost" data-bin="compost" role="button" tabindex="0" aria-label="Compost bin"><span class="bin-icon">🍃</span><span class="bin-label">Compost</span></div>
+            <div class="bin bin-landfill" data-bin="landfill" role="button" tabindex="0" aria-label="Landfill bin"><span class="bin-icon">🗑</span><span class="bin-label">Landfill</span></div>
+          </div>
+          <div class="challenge-feedback" id="challenge1Feedback" aria-live="polite"></div>
+          <button type="button" class="btn btn-secondary btn-replay" id="replay1">Replay</button>
+        </div>
+        <nav class="zone-nav">
+          <button type="button" class="btn btn-secondary" data-back="2">← Back</button>
+          <button type="button" class="btn btn-primary btn-next" id="zone3Next" data-next="4" disabled>Next →</button>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Zone 4: Composting + Sort Challenge 2 -->
+    <section class="zone" id="zone-4" data-zone="4">
+      <div class="zone-bg zone4-bg"></div>
+      <div class="zone-content">
+        <h2>Composting Section</h2>
+        <div class="riley-block">
+          <div class="riley-avatar" aria-hidden="true"></div>
+          <div class="riley-speech" id="riley-speech-4">
+            <p>Sort these into Compost (green) or not. Then discover why composting matters!</p>
+          </div>
+        </div>
+        <div class="challenge-wrap" id="challenge2Wrap">
+          <div class="challenge-items" id="challenge2Items"></div>
+          <div class="bins" id="challenge2Bins">
+            <div class="bin bin-compost" data-bin="compost" role="button" tabindex="0" aria-label="Compost bin"><span class="bin-icon">🍃</span><span class="bin-label">Compost</span></div>
+            <div class="bin bin-landfill" data-bin="landfill" role="button" tabindex="0" aria-label="Landfill bin"><span class="bin-icon">🗑</span><span class="bin-label">Not compost</span></div>
+          </div>
+          <div class="challenge-feedback" id="challenge2Feedback" aria-live="polite"></div>
+          <button type="button" class="btn btn-secondary btn-replay" id="replay2">Replay</button>
+        </div>
+        <div class="why-compost">
+          <p><strong>Why compost?</strong></p>
+          <button type="button" class="fact-btn" data-fact="soil">Makes soil</button>
+          <button type="button" class="fact-btn" data-fact="methane">Reduces methane</button>
+          <button type="button" class="fact-btn" data-fact="plants">Feeds plants</button>
+        </div>
+        <nav class="zone-nav">
+          <button type="button" class="btn btn-secondary" data-back="3">← Back</button>
+          <button type="button" class="btn btn-primary btn-next" id="zone4Next" data-next="5" disabled>Next →</button>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Zone 5: Landfill + Sort Challenge 3 + 50% fact -->
+    <section class="zone" id="zone-5" data-zone="5">
+      <div class="zone-bg zone5-bg"></div>
+      <div class="zone-content">
+        <h2>Landfill-Bound Area</h2>
+        <div class="riley-block">
+          <div class="riley-avatar" aria-hidden="true"></div>
+          <div class="riley-speech" id="riley-speech-5">
+            <p>Sort each item into Recycling, Compost, or Landfill. Then tap to discover an important fact!</p>
+          </div>
+        </div>
+        <button type="button" class="discover-btn" id="btn50Fact">Tap to discover: Why does this matter?</button>
+        <div class="challenge-wrap" id="challenge3Wrap">
+          <div class="challenge-items" id="challenge3Items"></div>
+          <div class="bins" id="challenge3Bins">
+            <div class="bin bin-recycle" data-bin="recycle" role="button" tabindex="0" aria-label="Recycling bin"><span class="bin-icon">♻</span><span class="bin-label">Recycling</span></div>
+            <div class="bin bin-compost" data-bin="compost" role="button" tabindex="0" aria-label="Compost bin"><span class="bin-icon">🍃</span><span class="bin-label">Compost</span></div>
+            <div class="bin bin-landfill" data-bin="landfill" role="button" tabindex="0" aria-label="Landfill bin"><span class="bin-icon">🗑</span><span class="bin-label">Landfill</span></div>
+          </div>
+          <div class="challenge-feedback" id="challenge3Feedback" aria-live="polite"></div>
+          <button type="button" class="btn btn-secondary btn-replay" id="replay3">Replay</button>
+        </div>
+        <nav class="zone-nav">
+          <button type="button" class="btn btn-secondary" data-back="4">← Back</button>
+          <button type="button" class="btn btn-primary btn-next" id="zone5Next" data-next="6" disabled>Next →</button>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Zone 6: Your Impact (Real-world connections) -->
+    <section class="zone" id="zone-6" data-zone="6">
+      <div class="zone-bg zone6-bg"></div>
+      <div class="zone-content">
+        <h2>Your Impact</h2>
+        <div class="riley-block">
+          <div class="riley-avatar" aria-hidden="true"></div>
+          <div class="riley-speech" id="riley-speech-6">
+            <p>What you do at home and school connects to the transfer station. Click each connection!</p>
+          </div>
+        </div>
+        <div class="connections">
+          <button type="button" class="connection-card" data-connection="rinse">
+            <span class="connection-place">At home</span>
+            <span class="connection-action">Rinse bottles & cans</span>
+            <span class="connection-reveal">When you rinse at home, materials are easier to sort and recycle here. Clean materials become new products!</span>
+          </button>
+          <button type="button" class="connection-card" data-connection="school">
+            <span class="connection-place">At school</span>
+            <span class="connection-action">Green bin in cafeteria</span>
+            <span class="connection-reveal">Food and napkins from your school's green bin can come here to become compost for gardens and farms!</span>
+          </button>
+          <button type="button" class="connection-card" data-connection="doubt">
+            <span class="connection-place">Not sure?</span>
+            <span class="connection-action">Look it up or ask</span>
+            <span class="connection-reveal">San Francisco has a guide: sfrecycles.org. Ask your family or teacher. Looking it up is smart!</span>
+          </button>
+          <button type="button" class="connection-card" data-connection="reusable">
+            <span class="connection-place">Every day</span>
+            <span class="connection-action">Use a reusable bottle</span>
+            <span class="connection-reveal">Using a reusable bottle means less trash to sort and less in the landfill. Small choices add up!</span>
+          </button>
+        </div>
+        <nav class="zone-nav">
+          <button type="button" class="btn btn-secondary" data-back="5">← Back</button>
+          <button type="button" class="btn btn-primary btn-next" data-next="7">Next: Make your pledge →</button>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Zone 7: Pledge & Certificate -->
+    <section class="zone" id="zone-7" data-zone="7">
+      <div class="zone-bg zone7-bg"></div>
+      <div class="zone-content">
+        <h2>Become a Sorting Champion</h2>
+        <div class="riley-block">
+          <div class="riley-avatar" aria-hidden="true"></div>
+          <div class="riley-speech">
+            <p>Pick at least one—or more!—to make your pledge.</p>
+          </div>
+        </div>
+        <div class="pledge-form">
+          <label class="pledge-option"><input type="checkbox" name="pledge" value="rinse"> I will rinse bottles and cans before putting them in recycling.</label>
+          <label class="pledge-option"><input type="checkbox" name="pledge" value="compost"> I will put food scraps and napkins in the green compost bin.</label>
+          <label class="pledge-option"><input type="checkbox" name="pledge" value="blue"> I will keep recyclables (paper, plastic, metal, glass) in the blue bin.</label>
+          <label class="pledge-option"><input type="checkbox" name="pledge" value="reusable"> I will avoid single-use plastics when I can (e.g., use a reusable bottle).</label>
+          <label class="pledge-option"><input type="checkbox" name="pledge" value="lookup"> I will look up or ask when I'm not sure where something goes.</label>
+          <label class="pledge-option"><input type="checkbox" name="pledge" value="family"> I will remind my family to sort our waste at home.</label>
+          <label class="pledge-option"><input type="checkbox" name="pledge" value="school"> I will use the right bin at school (blue, green, gray).</label>
+        </div>
+        <button type="button" class="btn btn-primary" id="btnCompletePledge" disabled>Complete my pledge</button>
+        <div class="certificate-actions" id="certificateActions" hidden>
+          <p class="success-msg">You're a Sorting Champion! 🎉</p>
+          <p>Thanks for touring with Riley! You're helping San Francisco reduce waste.</p>
+          <label class="cert-name-label">Your name (optional): <input type="text" id="certName" placeholder="A 4th Grade Ranger" maxlength="40"></label>
+          <div class="cert-buttons">
+            <button type="button" class="btn btn-primary" id="btnPrintCert">Print certificate</button>
+            <button type="button" class="btn btn-secondary" id="btnPlayAgain">Play again</button>
+          </div>
+        </div>
+        <nav class="zone-nav">
+          <button type="button" class="btn btn-secondary" data-back="6">← Back</button>
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <!-- Certificate (print-only content) -->
+  <div id="certificate" class="certificate-print" aria-hidden="true">
+    <div class="certificate-inner">
+      <h1>Sorting Champion</h1>
+      <p class="cert-subtitle">Recology Transfer Station Virtual Tour — San Francisco</p>
+      <p class="cert-name" id="certNamePrint">A 4th Grade Ranger</p>
+      <p class="cert-date" id="certDatePrint"></p>
+      <p class="cert-pledges-title">My pledges:</p>
+      <ul class="cert-pledges" id="certPledgesPrint"></ul>
+      <p class="cert-footer">Thank you for helping reduce waste. Keep sorting!</p>
+    </div>
+  </div>
+
+  <!-- Modal for 50% fact -->
+  <div class="modal-overlay" id="modal50" hidden aria-modal="true" role="dialog" aria-labelledby="modal50Title">
+    <div class="modal">
+      <h3 id="modal50Title">Why does this matter?</h3>
+      <p>Over 50% of what ends up in the landfill could have been recycled or composted. When you sort correctly at home and school, you help change that!</p>
+      <button type="button" class="btn btn-primary modal-close" id="closeModal50">Got it</button>
+    </div>
+  </div>
+
+  <!-- Connection reveal modal -->
+  <div class="modal-overlay" id="modalConnection" hidden aria-modal="true" role="dialog">
+    <div class="modal">
+      <p class="connection-modal-msg" id="connectionModalMsg"></p>
+      <button type="button" class="btn btn-primary modal-close" id="closeModalConnection">Got it</button>
+    </div>
+  </div>
+
+  <script src="js/state.js"></script>
+  <script src="js/challenges.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/certificate.js"></script>
+</body>
+</html>
