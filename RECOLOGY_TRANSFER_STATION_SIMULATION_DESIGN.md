@@ -10,14 +10,14 @@
 
 ## 1. Persona Character Profile: Tour Guide
 
-### Character: **Riley the Recology Ranger**
+### Character: **Riley the Recology Explorer**
 
 **Name:** Riley  
-**Title:** Recology Ranger (virtual tour guide)  
+**Title:** Recology Explorer (virtual tour guide)  
 **Pronouns:** They/them (inclusive, relatable)
 
 #### Background Story
-Riley is a friendly “Ranger” who works at the Recology San Francisco transfer station. They love showing people how waste gets sorted and where it goes. Riley used to be confused about recycling and composting too, until they learned the rules—now they want to help kids become “Sorting Champions” so less trash goes to the landfill.
+Riley is a friendly “Explorer” who works at the Recology San Francisco transfer station. They love showing people how waste gets sorted and where it goes. Riley used to be confused about recycling and composting too, until they learned the rules—now they want to help kids become “Sorting Champions” so less trash goes to the landfill.
 
 #### Personality Traits
 - **Curious and upbeat:** Asks questions, celebrates correct answers, never shames wrong ones.  
@@ -28,7 +28,7 @@ Riley is a friendly “Ranger” who works at the Recology San Francisco transfe
 
 #### Visual Appearance (for web illustration)
 - **Species/style:** Stylized human or friendly mascot (e.g., person in a Recology-style vest or a ranger character).  
-- **Outfit:** Green vest with “Recology Ranger” badge, comfortable pants, closed-toe shoes (safety). Optional: recycling/compost pins or patches.  
+- **Outfit:** Green vest with “Recology Explorer” badge, comfortable pants, closed-toe shoes (safety). Optional: recycling/compost pins or patches.  
 - **Colors:** Greens and earth tones; accent blue for recycling.  
 - **Expression:** Usually smiling; eyes wide when excited; thoughtful when explaining.  
 - **Accessories:** Clipboard or tablet to “check off” progress; optional safety helmet (flattened, cartoon style).
@@ -51,7 +51,7 @@ Riley is a friendly “Ranger” who works at the Recology San Francisco transfe
 | **Encouraging**| After incorrect answer   | Gentle nod, “Try again” expression; no negative sound; supportive line of dialogue |
 
 #### Sample Dialogue Snippets
-- **Intro:** “Hey! I’m Riley, your Recology Ranger. Today we’re going to explore where San Francisco’s trash goes—and you’ll get to make some sorting decisions. Ready?”  
+- **Intro:** “Hey! I’m Riley, your Recology Explorer. Today we’re going to explore where San Francisco’s trash goes—and you’ll get to make some sorting decisions. Ready?”  
 - **After correct sort:** “Yes! That’s exactly where that goes. You’re helping keep stuff out of the landfill!”  
 - **After mistake:** “Good try! This one actually goes in the blue bin because it’s [reason]. Want to try the next one?”  
 - **Fact:** “Here’s a cool fact: more than half of what ends up in the landfill could have been recycled or composted. You can change that!”
@@ -319,7 +319,7 @@ Landing Page → Welcome / Intro (Riley) → Zone 1 → Zone 2 → … → Zone 
   - B) Bottle in recycling, core in compost  
   - C) Throw both away  
 - **Correct:** B.  
-- **Feedback:** B: “Perfect! You’re thinking like a Ranger.” A/C: “The bottle goes in blue; the apple core goes in the green bin for compost.”  
+- **Feedback:** B: “Perfect! You’re thinking like an Explorer.” A/C: “The bottle goes in blue; the apple core goes in the green bin for compost.”  
 - **Branching:** If B, Riley says “You’re ready to make a pledge.” If not, one more tip then same transition.
 
 ### General Branching Rules
@@ -351,7 +351,7 @@ Landing Page → Welcome / Intro (Riley) → Zone 1 → Zone 2 → … → Zone 
 
 ### Pause Point 4: Single-Use vs. Reusable
 - **Layout:** Side-by-side: disposable bottle vs. reusable bottle.  
-- **Hotspot:** “Why do Rangers care about reusable?”  
+- **Hotspot:** “Why do Explorers care about reusable?”  
 - **Reveal:** “Using a reusable bottle means less trash to sort and less that might end up in the landfill. Small choices add up!”  
 - **Riley:** “Every time you choose reusable, you’re helping.”
 
@@ -379,7 +379,7 @@ Landing Page → Welcome / Intro (Riley) → Zone 1 → Zone 2 → … → Zone 
 - **Update:** After each zone “Next” or challenge completion.
 
 ### Points Display
-- **Label:** “Sorting Points” or “Ranger Points.”  
+- **Label:** “Sorting Points” or “Explorer Points.”  
 - **Number:** Sum of all activity points.  
 - **Optional:** Small “+10” float when points are earned.
 
@@ -417,7 +417,7 @@ Landing Page → Welcome / Intro (Riley) → Zone 1 → Zone 2 → … → Zone 
 ### Certificate of Completion
 - **Content:**  
   - Title: “Sorting Champion — Recology Transfer Station Virtual Tour.”  
-  - Student name: Optional text input (“Enter your name”) or “A 4th Grade Ranger.”  
+  - Student name: Optional text input (“Enter your name”) or “A 4th Grade Explorer.”
   - Date: Auto-filled (tour completion date).  
   - List of pledged actions (from checkboxes).  
   - Riley character and Recology/SF branding (tasteful).  

@@ -1,6 +1,6 @@
 # Recology Transfer Station — Virtual Tour
 
-Interactive web simulation for 4th-grade students. Explore the Recology San Francisco transfer station with Riley the Recology Ranger.
+Interactive web simulation for 4th-grade students. Explore the Recology San Francisco transfer station with Riley the Recology Explorer.
 
 ## Run in your browser
 

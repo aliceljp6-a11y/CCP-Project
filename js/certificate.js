@@ -35,7 +35,7 @@
     AppState.setPledgeDone();
     certActions.hidden = false;
     btnComplete.hidden = true;
-    const name = (certName && certName.value.trim()) || 'A 4th Grade Ranger';
+    const name = (certName && certName.value.trim()) || 'A 4th Grade Explorer';
     certNamePrint.textContent = name;
     certDatePrint.textContent = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     certPledgesPrint.innerHTML = '';
@@ -47,7 +47,7 @@
   });
 
   btnPrint?.addEventListener('click', () => {
-    certNamePrint.textContent = (certName && certName.value.trim()) || 'A 4th Grade Ranger';
+    certNamePrint.textContent = (certName && certName.value.trim()) || 'A 4th Grade Explorer';
     certEl.classList.add('visible');
     certEl.setAttribute('aria-hidden', 'false');
     requestAnimationFrame(() => {

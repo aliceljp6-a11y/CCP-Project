@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Recology Waste Sorter - Sort your waste!</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <header>
+      <h1>♻️ Recology Waste Sorter</h1>
+      <p class="subtitle">Point your camera at an item and find out which bin it belongs in!</p>
+    </header>
+
+    <main>
+      <div class="camera-section">
+        <div class="camera-frame" id="cameraFrame">
+          <div class="camera-placeholder" id="cameraPlaceholder">
+            <span class="placeholder-icon">📷</span>
+            <p>Tap "Start Sorting!" to turn on your camera</p>
+          </div>
+          <video id="webcam" autoplay playsinline muted></video>
+        </div>
+      </div>
+
+      <button class="start-btn" id="startBtn">Start Sorting! 🚀</button>
+
+      <div class="result-section" id="resultSection">
+        <div class="emoji-display" id="emojiDisplay">🗑️</div>
+        <p class="instruction" id="instruction">Point your camera at something to sort!</p>
+      </div>
+    </main>
+
+    <footer>
+      <p>San Francisco • Green = Compost • Blue = Recycle • Black = Landfill</p>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.7.4/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.3/dist/teachablemachine-image.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

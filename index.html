@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recology Transfer Station — Virtual Tour | Riley the Recology Ranger</title>
+  <title>Recology Transfer Station — Virtual Tour | Riley the Recology Explorer</title>
+  <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.js" type="module"></script>
   <link rel="stylesheet" href="css/main.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,14 +46,25 @@
       <div class="zone-bg landing-bg"></div>
       <div class="zone-content">
         <h1>Recology San Francisco<br>Transfer Station</h1>
-        <p class="tagline">Virtual tour for 4th grade rangers</p>
+        <p class="tagline">Virtual tour for 4th grade explorers</p>
         <div class="riley-block riley-landing">
-          <div class="riley-avatar" aria-hidden="true"></div>
+          <div
+            id="riley-landing-lottie"
+            aria-hidden="true"
+            style="width:280px;height:280px;display:flex;align-items:center;justify-content:center;border-radius:16px;background:transparent;"
+          >
+            <div
+              data-fallback
+              style="width:280px;height:280px;display:flex;align-items:center;justify-content:center;border-radius:16px;background:#f0f0f0;font-size:0.9rem;color:#888;"
+            >
+              🎒 Riley coming soon!
+            </div>
+          </div>
           <div class="riley-speech">
-            <p>Hey! I'm <strong>Riley</strong>, your Recology Ranger. Today we're going to explore where San Francisco's trash goes—and you'll get to make sorting decisions. Ready?</p>
+            <p>Whoa—you just saw how much trash can pile up in ONE day! I'm <strong>Riley</strong>, your Recology Explorer. Let's head inside the transfer station and figure out what happens to all of it—and how you can make a big difference.</p>
           </div>
         </div>
-        <button type="button" class="btn btn-primary btn-start" id="btnStartTour">Start the tour</button>
+        <button type="button" class="btn btn-primary btn-start" id="btnStartTour">Explore inside the station</button>
       </div>
     </section>
 
@@ -64,22 +76,104 @@
         <div class="riley-block">
           <div class="riley-avatar" aria-hidden="true"></div>
           <div class="riley-speech" id="riley-speech-1">
-            <p>This is where trucks bring San Francisco's waste. Click the truck and the scale to see what happens!</p>
+            <p>A truck just pulled in — and it's carrying YOUR neighborhood's trash. Before we check the scale... can you guess how heavy it is? 🤔</p>
           </div>
         </div>
-        <div class="activity-receiving">
-          <button type="button" class="receiving-item" id="btnTruck" aria-label="See a truck arrive">
-            <span class="icon">🚛</span>
-            <span class="label">See a truck arrive</span>
-          </button>
-          <button type="button" class="receiving-item" id="btnScale" aria-label="Weigh in">
-            <span class="icon">⚖️</span>
-            <span class="label">Weigh in</span>
-            <span class="scale-value" id="scaleValue"></span>
-          </button>
+        <div class="challenge-wrap" id="zone1TruckMystery">
+          <div id="truckGuessStep">
+            <div style="margin: 0.75rem 0 0;">
+              <p style="margin:0; font-weight:800; color:#1f2937;">🤔 Guess the weight of the truck!</p>
+              <p style="margin:0.35rem 0 0; color:#4b5563;">Pick one tile. Then you&apos;ll see what happens!</p>
+            </div>
+            <div
+              id="truckGuessGrid"
+              role="group"
+              aria-label="Truck weight prediction"
+              style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:0.75rem;"
+            >
+              <button
+                type="button"
+                class="truck-guess-tile"
+                data-truck-guess="A"
+                aria-label="A) About as heavy as a school bus"
+                style="padding:14px 12px;border-radius:16px;border:2px solid rgba(0,0,0,0.12);background:#111827;color:#E5E7EB;font-weight:800;cursor:pointer;transition:transform 120ms ease, background-color 120ms ease, border-color 120ms ease;"
+              >
+                A) About as heavy as a school bus
+              </button>
+              <button
+                type="button"
+                class="truck-guess-tile"
+                data-truck-guess="B"
+                aria-label="B) Heavier than 10 elephants"
+                style="padding:14px 12px;border-radius:16px;border:2px solid rgba(0,0,0,0.12);background:#111827;color:#E5E7EB;font-weight:800;cursor:pointer;transition:transform 120ms ease, background-color 120ms ease, border-color 120ms ease;"
+              >
+                B) Heavier than 10 elephants
+              </button>
+              <button
+                type="button"
+                class="truck-guess-tile"
+                data-truck-guess="C"
+                aria-label="C) About the same as 200 4th graders"
+                style="padding:14px 12px;border-radius:16px;border:2px solid rgba(0,0,0,0.12);background:#111827;color:#E5E7EB;font-weight:800;cursor:pointer;transition:transform 120ms ease, background-color 120ms ease, border-color 120ms ease;"
+              >
+                C) About the same as 200 4th graders
+              </button>
+              <button
+                type="button"
+                class="truck-guess-tile"
+                data-truck-guess="D"
+                aria-label="D) As heavy as a blue whale"
+                style="padding:14px 12px;border-radius:16px;border:2px solid rgba(0,0,0,0.12);background:#111827;color:#E5E7EB;font-weight:800;cursor:pointer;transition:transform 120ms ease, background-color 120ms ease, border-color 120ms ease;"
+              >
+                D) As heavy as a blue whale
+              </button>
+            </div>
+            <div style="display:flex;justify-content:center;margin-top:14px;">
+              <button
+                type="button"
+                class="btn btn-primary"
+                id="btnCheckTruckGuess"
+                style="display:none;"
+              >
+                Check my answer →
+              </button>
+            </div>
+          </div>
+
+          <div id="truckArrivalStep" hidden>
+            <div style="position:relative;overflow:hidden;height:96px;border-radius:16px;background:rgba(255,255,255,0.65);border:1px solid rgba(0,0,0,0.06);">
+              <div
+                id="truckSprite"
+                aria-hidden="true"
+                style="position:absolute;left:8px;top:18px;font-size:64px;transform:translateX(-260px);opacity:0;transition:transform 900ms cubic-bezier(0.2,0.8,0.2,1), opacity 300ms ease;"
+              >
+                🚛
+              </div>
+            </div>
+          </div>
+
+          <div id="scaleRevealStep" hidden>
+            <div id="truckScaleReading" style="margin-top: 0.5rem; text-align:center; font-weight:900; color:#111827;">
+              🧮 Scale reading will appear here…
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;align-items:center;margin-top:14px;">
+              <div
+                id="scaleFact1"
+                style="display:none;padding:10px 14px;border-radius:9999px;background:#F0FDF4;border:1px solid rgba(0,0,0,0.08);font-weight:900;color:#065f46;opacity:0;transform:scale(0.96);transition:transform 220ms ease, opacity 220ms ease;"
+              >
+                🗑️ That&apos;s just ONE truck. The pile you saw in the simulation? That&apos;s hundreds of trucks worth — every single day.
+              </div>
+              <div
+                id="scaleFact2"
+                style="display:none;padding:10px 14px;border-radius:9999px;background:#EEF2FF;border:1px solid rgba(0,0,0,0.08);font-weight:900;color:#3730A3;opacity:0;transform:scale(0.96);transition:transform 220ms ease, opacity 220ms ease;"
+              >
+                🎒 27 tons = about 6,000 fourth graders standing on a scale together!
+              </div>
+            </div>
+          </div>
         </div>
         <nav class="zone-nav">
-          <button type="button" class="btn btn-primary" id="zone1Next">Start the tour →</button>
+          <button type="button" class="btn btn-primary" id="zone1Next" disabled hidden>Next stop →</button>
         </nav>
       </div>
     </section>
@@ -92,20 +186,32 @@
         <div class="riley-block">
           <div class="riley-avatar" aria-hidden="true"></div>
           <div class="riley-speech" id="riley-speech-2">
-            <p>Watch the conveyor and click items to learn where they go!</p>
+            <p>Okay, now we're going BEHIND THE SCENES! 🎬 This is the sorting line — where everything from those trucks gets separated. Workers and machines work together here at super high speed. Let me show you how it works...</p>
           </div>
         </div>
         <div class="conveyor-activity">
-          <button type="button" class="conveyor-btn" id="btnConveyor">Watch the line</button>
-          <div class="conveyor-items" id="conveyorItems">
-            <button type="button" class="conveyor-item" data-dest="recycle" data-msg="Plastic bottles go in the blue recycling bin so they can become new products!">🥤 Bottle</button>
-            <button type="button" class="conveyor-item" data-dest="compost" data-msg="Banana peels go in the green compost bin—they turn into soil!">🍌 Banana peel</button>
-            <button type="button" class="conveyor-item" data-dest="landfill" data-msg="Chip bags often can't be recycled in SF—they go to landfill. Choosing snacks with less packaging helps!">🥫 Chip bag</button>
+          <div class="conveyor-stage" id="conveyorStage">
+            <div class="conveyor-belt" aria-hidden="true">
+              <div class="belt-track"></div>
+              <div class="belt-items">
+                <div class="belt-item" id="beltItem0" aria-hidden="true">🥤</div>
+                <div class="belt-item" id="beltItem1" aria-hidden="true">🍌</div>
+                <div class="belt-item" id="beltItem2" aria-hidden="true">🥫</div>
+              </div>
+            </div>
+            <p class="conveyor-caption">
+              Everything gets tossed onto this belt — recycling, compost, landfill, all mixed together. Someone has to sort it fast!
+            </p>
+          </div>
+          <div class="challenge-wrap" id="zone2ItemChallenge">
+            <div id="zone2QuestionWrap"></div>
+            <div id="zone2AnswerWrap" hidden></div>
+            <div id="zone2FactWrap" hidden></div>
           </div>
         </div>
         <nav class="zone-nav">
           <button type="button" class="btn btn-secondary" data-back="1">← Back</button>
-          <button type="button" class="btn btn-primary btn-next" data-next="3">Next →</button>
+          <button type="button" class="btn btn-primary btn-next" id="zone2Next" data-next="3" disabled>Next Zone →</button>
         </nav>
       </div>
     </section>
@@ -264,7 +370,7 @@
         <div class="certificate-actions" id="certificateActions" hidden>
           <p class="success-msg">You're a Sorting Champion! 🎉</p>
           <p>Thanks for touring with Riley! You're helping San Francisco reduce waste.</p>
-          <label class="cert-name-label">Your name (optional): <input type="text" id="certName" placeholder="A 4th Grade Ranger" maxlength="40"></label>
+          <label class="cert-name-label">Your name (optional): <input type="text" id="certName" placeholder="A 4th Grade Explorer" maxlength="40"></label>
           <div class="cert-buttons">
             <button type="button" class="btn btn-primary" id="btnPrintCert">Print certificate</button>
             <button type="button" class="btn btn-secondary" id="btnPlayAgain">Play again</button>
@@ -282,7 +388,7 @@
     <div class="certificate-inner">
       <h1>Sorting Champion</h1>
       <p class="cert-subtitle">Recology Transfer Station Virtual Tour — San Francisco</p>
-      <p class="cert-name" id="certNamePrint">A 4th Grade Ranger</p>
+      <p class="cert-name" id="certNamePrint">A 4th Grade Explorer</p>
       <p class="cert-date" id="certDatePrint"></p>
       <p class="cert-pledges-title">My pledges:</p>
       <ul class="cert-pledges" id="certPledgesPrint"></ul>
@@ -311,5 +417,31 @@
   <script src="js/challenges.js"></script>
   <script src="js/app.js"></script>
   <script src="js/certificate.js"></script>
+  <script>
+    (function () {
+      var mount = document.getElementById('riley-landing-lottie')
+      if (!mount) return
+
+      // Keep the fallback visible if /riley.json isn't present yet.
+      fetch('/riley.json', { method: 'HEAD' })
+        .then(function (res) {
+          if (!res || !res.ok) throw new Error('riley.json missing')
+
+          var player = document.createElement('dotlottie-player')
+          player.setAttribute('src', '/riley.json')
+          player.setAttribute('background', 'transparent')
+          player.setAttribute('speed', '1')
+          player.setAttribute('style', 'width:280px;height:280px;')
+          player.setAttribute('loop', '')
+          player.setAttribute('autoplay', '')
+
+          mount.innerHTML = ''
+          mount.appendChild(player)
+        })
+        .catch(function () {
+          // Leave fallback div in place.
+        })
+    })()
+  </script>
 </body>
 </html>
