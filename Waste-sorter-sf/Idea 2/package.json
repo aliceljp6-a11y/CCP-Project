@@ -1,0 +1,28 @@
+{
+  "name": "trash-simulation",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "sync:tour": "node scripts/sync-tour.cjs",
+    "dev": "npm run sync:tour && vite",
+    "build": "npm run sync:tour && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "matter-js": "^0.20.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/matter-js": "^0.19.6",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15",
+    "typescript": "^5.6.3",
+    "vite": "^7.3.1"
+  }
+}

@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Nunito', system-ui, sans-serif;
+}
+
+@keyframes tourCtaPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+.animate-tour-cta {
+  animation: tourCtaPulse 1.3s ease-in-out infinite;
+}
+
+@keyframes liveDotPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-live-dot {
+  animation: liveDotPulse 2s ease-in-out infinite;
+}
+
+@keyframes introCardIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-intro-card {
+  animation: introCardIn 260ms ease-out;
+}
+
+@keyframes recycleBannerInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  12% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  84% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+.animate-recycle-banner {
+  animation: recycleBannerInOut 2.5s ease-out forwards;
+}
+
+/* AppShell — theater curtain transition to tour */
+@keyframes theaterCurtainLeftClose {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes theaterCurtainRightClose {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes theaterCurtainLeftOpen {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes theaterCurtainRightOpen {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.theater-curtain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.theater-curtain-panel {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  min-height: 100dvh;
+  will-change: transform;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.35);
+}
+
+.theater-curtain-panel--left {
+  background: linear-gradient(
+    90deg,
+    #2a0809 0%,
+    #5c1218 28%,
+    #7f1d1d 50%,
+    #5c1218 72%,
+    #3d0d0f 100%
+  );
+}
+
+.theater-curtain-panel--right {
+  background: linear-gradient(
+    270deg,
+    #2a0809 0%,
+    #5c1218 28%,
+    #7f1d1d 50%,
+    #5c1218 72%,
+    #3d0d0f 100%
+  );
+}
+
+.theater-curtain-panel--left.theater-curtain--closing {
+  animation: theaterCurtainLeftClose 0.8s cubic-bezier(0.45, 0, 0.55, 1) forwards;
+}
+
+.theater-curtain-panel--right.theater-curtain--closing {
+  animation: theaterCurtainRightClose 0.8s cubic-bezier(0.45, 0, 0.55, 1) forwards;
+}
+
+.theater-curtain-panel--left.theater-curtain--opening {
+  animation: theaterCurtainLeftOpen 0.6s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+
+.theater-curtain-panel--right.theater-curtain--opening {
+  animation: theaterCurtainRightOpen 0.6s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
