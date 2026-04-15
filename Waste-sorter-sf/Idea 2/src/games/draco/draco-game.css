@@ -308,6 +308,13 @@
   margin: 0 0 0.2rem;
 }
 
+.draco-sort-tip {
+  margin: 0.35rem 0 0;
+  font-size: 0.92rem;
+  color: #475569;
+  font-style: italic;
+}
+
 .draco-bin-row {
   margin-top: 0.8rem;
   display: grid;

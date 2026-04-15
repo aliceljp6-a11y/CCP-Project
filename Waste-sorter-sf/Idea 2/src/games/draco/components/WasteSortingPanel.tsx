@@ -1,15 +1,28 @@
 import { BIN_LABELS, SHOP_COPY } from '../data/copy'
 import type { BinType, DracoItem } from '../types'
 
+/** Tips (short hints) only show when Draco needs extra help — health below this percent. */
+const TIP_HEALTH_THRESHOLD = 25
+
 type WasteSortingPanelProps = {
   item: DracoItem
+  health: number
   feedback: string
   onSelectBin: (bin: BinType) => void
   onContinue: () => void
   isResolved: boolean
 }
 
-export function WasteSortingPanel({ item, feedback, onSelectBin, onContinue, isResolved }: WasteSortingPanelProps) {
+export function WasteSortingPanel({
+  item,
+  health,
+  feedback,
+  onSelectBin,
+  onContinue,
+  isResolved,
+}: WasteSortingPanelProps) {
+  const showTip = health < TIP_HEALTH_THRESHOLD
+
   return (
     <section className="draco-sort-card" aria-live="polite">
       <h3>{SHOP_COPY.sortPrompt}</h3>
@@ -19,7 +32,7 @@ export function WasteSortingPanel({ item, feedback, onSelectBin, onContinue, isR
         </span>
         <div>
           <p className="draco-waste-name">{item.wasteName}</p>
-          <p>{item.shortHint}</p>
+          {showTip && <p className="draco-sort-tip">{item.shortHint}</p>}
         </div>
       </div>
       <div className="draco-bin-row">

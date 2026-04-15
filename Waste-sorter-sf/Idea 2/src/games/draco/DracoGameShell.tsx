@@ -136,6 +136,7 @@ export default function DracoGameShell() {
           {phase === 'sorting' && currentItem && (
             <WasteSortingPanel
               item={currentItem}
+              health={health}
               feedback={sortFeedback}
               isResolved={sortResolved}
               onSelectBin={applySort}
