@@ -424,13 +424,28 @@
       var mount = document.getElementById('riley-landing-lottie')
       if (!mount) return
 
-      // Keep the fallback visible if /riley.json isn't present yet.
-      fetch('/riley.json', { method: 'HEAD' })
+      // Try the new Riley animation first, then legacy filename.
+      var rileyCandidates = ['../girl%20waving%20(1).json', '../riley.json.json']
+      var rileySrc = null
+
+      function checkNext(index) {
+        if (index >= rileyCandidates.length) return Promise.reject(new Error('No Riley animation found'))
+        var candidate = rileyCandidates[index]
+        return fetch(candidate, { method: 'HEAD' }).then(function (res) {
+          if (res && res.ok) {
+            rileySrc = candidate
+            return
+          }
+          return checkNext(index + 1)
+        })
+      }
+
+      checkNext(0)
         .then(function (res) {
-          if (!res || !res.ok) throw new Error('riley.json missing')
+          if (!rileySrc) throw new Error('riley animation missing')
 
           var player = document.createElement('dotlottie-player')
-          player.setAttribute('src', '/riley.json')
+          player.setAttribute('src', rileySrc)
           player.setAttribute('background', 'transparent')
           player.setAttribute('speed', '1')
           player.setAttribute('style', 'width:280px;height:280px;')
