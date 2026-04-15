@@ -29,7 +29,6 @@ export default function SimulationApp({ onStartTour }: SimulationAppProps) {
   const shakeTriggeredRef = useRef({ knees: false, waist: false, head: false })
   const prevRunningRef = useRef(false)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
-  const endPauseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const onPileHeightChange = useCallback((heightPx: number) => {
     if (heightPx >= HEAD_HEIGHT && !shakeTriggeredRef.current.head) {
@@ -64,30 +63,16 @@ export default function SimulationApp({ onStartTour }: SimulationAppProps) {
     setShake(false)
     setShowEndCard(false)
     setShowEndPause(false)
-    if (endPauseTimeoutRef.current) {
-      clearTimeout(endPauseTimeoutRef.current)
-      endPauseTimeoutRef.current = null
-    }
     shakeTriggeredRef.current = { knees: false, waist: false, head: false }
   }, [])
 
   useEffect(() => {
     if (prevRunningRef.current && !running && currentMinutes === END_MINUTES) {
+      // Enter the end-of-day highlight phase. Do not auto-advance.
       setShowEndPause(true)
-      if (endPauseTimeoutRef.current) clearTimeout(endPauseTimeoutRef.current)
-      endPauseTimeoutRef.current = setTimeout(() => {
-        setShowEndPause(false)
-        setShowEndCard(true)
-      }, 3000)
     }
     prevRunningRef.current = running
   }, [running, currentMinutes])
-
-  useEffect(() => {
-    return () => {
-      if (endPauseTimeoutRef.current) clearTimeout(endPauseTimeoutRef.current)
-    }
-  }, [])
 
   React.useEffect(() => {
     if (!running) return
@@ -170,6 +155,10 @@ export default function SimulationApp({ onStartTour }: SimulationAppProps) {
             onPileHeightChange={onPileHeightChange}
             showMisplacedHighlight={showEndPause}
             showPauseBanner={showEndPause}
+            onHighlightNext={() => {
+              setShowEndPause(false)
+              setShowEndCard(true)
+            }}
           />
         </div>
       </main>

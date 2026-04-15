@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Trash Simulation!
 
 A small educational web app for 4th graders: see how 24 hours of San Francisco’s waste fills a transfer station. Built with React, Matter.js, and Tailwind CSS.
@@ -32,6 +31,3 @@ See **[DEPLOY.md](./DEPLOY.md)** for step-by-step instructions to push this proj
 - Matter.js (2D physics)
 - Tailwind CSS
 - Vite
-=======
-# Trash-Simulation
->>>>>>> b0681590e2b566af1446145e5d9ef3627df5080f
