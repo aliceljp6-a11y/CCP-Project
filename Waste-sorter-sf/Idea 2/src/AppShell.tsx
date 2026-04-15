@@ -8,7 +8,7 @@ function TourAppFrame() {
           Re-copy files there after any CCP Project edits */}
       <iframe
         title="Recology Transfer Station Tour"
-        src="/tour/index.html"
+        src="./tour/index.html"
         className="h-full w-full border-0"
       />
     </div>
