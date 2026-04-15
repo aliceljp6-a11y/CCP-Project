@@ -8,20 +8,9 @@
   const certName = document.getElementById('certName');
   const certNamePrint = document.getElementById('certNamePrint');
   const certDatePrint = document.getElementById('certDatePrint');
-  const certPledgesPrint = document.getElementById('certPledgesPrint');
   const certEl = document.getElementById('certificate');
   const btnPrint = document.getElementById('btnPrintCert');
   const btnPlayAgain = document.getElementById('btnPlayAgain');
-
-  const pledgeLabels = {
-    rinse: 'I will rinse bottles and cans before putting them in recycling.',
-    compost: 'I will put food scraps and napkins in the green compost bin.',
-    blue: 'I will keep recyclables (paper, plastic, metal, glass) in the blue bin.',
-    reusable: 'I will avoid single-use plastics when I can (e.g., use a reusable bottle).',
-    lookup: 'I will look up or ask when I\'m not sure where something goes.',
-    family: 'I will remind my family to sort our waste at home.',
-    school: 'I will use the right bin at school (blue, green, gray).'
-  };
 
   function updateCompleteButton() {
     const checked = document.querySelectorAll('input[name="pledge"]:checked').length;
@@ -31,23 +20,30 @@
   pledgeCheckboxes.forEach(cb => cb.addEventListener('change', updateCompleteButton));
   updateCompleteButton();
 
+  function resolveCertName() {
+    return (certName && certName.value.trim()) || 'A 4th Grade Explorer';
+  }
+
+  function updateCertificateNamePreview() {
+    if (!certNamePrint) return;
+    certNamePrint.textContent = resolveCertName();
+  }
+
+  certName?.addEventListener('input', updateCertificateNamePreview);
+  certName?.addEventListener('change', updateCertificateNamePreview);
+
   btnComplete?.addEventListener('click', () => {
     AppState.setPledgeDone();
     certActions.hidden = false;
     btnComplete.hidden = true;
-    const name = (certName && certName.value.trim()) || 'A 4th Grade Explorer';
-    certNamePrint.textContent = name;
-    certDatePrint.textContent = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-    certPledgesPrint.innerHTML = '';
-    document.querySelectorAll('input[name="pledge"]:checked').forEach(cb => {
-      const li = document.createElement('li');
-      li.textContent = pledgeLabels[cb.value] || cb.value;
-      certPledgesPrint.appendChild(li);
-    });
+    updateCertificateNamePreview();
+    if (certDatePrint) {
+      certDatePrint.textContent = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
   });
 
   btnPrint?.addEventListener('click', () => {
-    certNamePrint.textContent = (certName && certName.value.trim()) || 'A 4th Grade Explorer';
+    updateCertificateNamePreview();
     certEl.classList.add('visible');
     certEl.setAttribute('aria-hidden', 'false');
     requestAnimationFrame(() => {
