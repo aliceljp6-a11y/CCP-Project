@@ -1,5 +1,7 @@
 import React from 'react'
 
+import fartCloudUrl from '../assets/images/fart_cloud.png'
+
 const RECOLOGY_SF_URL = 'https://www.recology.com/recology-san-francisco/'
 
 export type EndCardUserType = 'guide' | 'student'
@@ -37,9 +39,6 @@ function getPickedSummary(predictionChoice: EndCardProps['predictionChoice']) {
   const label = PREDICTION_LABELS[letter]
   return `You picked ${letter}) ${label}.`
 }
-
-const FUN_FACT_PLACEHOLDER =
-  '🗑️ [FUN FACT PLACEHOLDER] — imagine that in farts 💨'
 
 const TALK_PROMPT =
   'How do you think the amount of trash changes on different days of the week?'
@@ -151,7 +150,17 @@ export function EndCard({
                 Fun fact
               </h3>
               <p className="font-display text-lg font-extrabold leading-snug text-stone-900 sm:text-xl">
-                {FUN_FACT_PLACEHOLDER}
+                <span className="font-display font-extrabold">Fun fact</span>
+                <span className="font-display mt-2 block font-normal">
+                  Each day, the smell from a transfer station is like 1,500 farts trapped in one room
+                  <img
+                    src={fartCloudUrl}
+                    alt=""
+                    aria-hidden="true"
+                    className="inline-block"
+                    style={{ height: '1em', width: 'auto', verticalAlign: '-0.15em' }}
+                  />
+                </span>
               </p>
               {!isGuide && onStartTour && (
                 <button
