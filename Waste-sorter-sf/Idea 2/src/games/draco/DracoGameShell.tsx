@@ -20,7 +20,11 @@ function clampHealth(value: number) {
   return Math.max(0, Math.min(MAX_HEALTH, value))
 }
 
-export default function DracoGameShell() {
+type DracoGameShellProps = {
+  onBackToSimulation?: () => void
+}
+
+export default function DracoGameShell({ onBackToSimulation }: DracoGameShellProps) {
   const [phase, setPhase] = useState<DracoPhase>('intro')
   const [coins, setCoins] = useState(10)
   const [health, setHealth] = useState(START_HEALTH)
@@ -54,9 +58,14 @@ export default function DracoGameShell() {
       <header className="draco-topbar">
         <CoinCounter coins={coins} />
         <HealthBar health={health} label={tierLabel} />
+        {onBackToSimulation && (
+          <button type="button" className="draco-back-btn" onClick={onBackToSimulation}>
+            ← Back to simulation
+          </button>
+        )}
       </header>
     ),
-    [coins, health, tierLabel],
+    [coins, health, onBackToSimulation, tierLabel],
   )
 
   function resetGame() {

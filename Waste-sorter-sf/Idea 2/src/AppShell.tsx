@@ -32,6 +32,12 @@ export default function AppShell() {
     setCurtainPhase('closing')
   }, [])
 
+  const handleBackToSimulation = useCallback(() => {
+    transitionLockRef.current = false
+    setCurtainPhase('idle')
+    setActiveApp('simulation')
+  }, [])
+
   const showCurtains = curtainPhase === 'closing' || curtainPhase === 'opening'
 
   return (
@@ -39,7 +45,7 @@ export default function AppShell() {
       {activeApp === 'simulation' ? (
         <SimulationApp onStartTour={handleStartTour} />
       ) : (
-        <DracoGameShell />
+        <DracoGameShell onBackToSimulation={handleBackToSimulation} />
       )}
 
       {showCurtains && (

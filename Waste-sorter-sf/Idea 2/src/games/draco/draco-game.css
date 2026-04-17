@@ -22,7 +22,7 @@
   top: 0.5rem;
   z-index: 20;
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto 1fr auto;
   gap: 0.75rem;
   margin: 0 auto 1rem;
   max-width: 1120px;
@@ -226,6 +226,7 @@
 
 .draco-primary-btn,
 .draco-secondary-btn,
+.draco-back-btn,
 .draco-bin-btn,
 .draco-promise-btn {
   border: none;
@@ -248,8 +249,19 @@
   color: #0f172a;
 }
 
+.draco-back-btn {
+  align-self: center;
+  justify-self: end;
+  padding: 0.62rem 0.85rem;
+  font-size: 0.9rem;
+  border: 1px solid #cbd5e1;
+  background: #ffffffd9;
+  color: #0f172a;
+}
+
 .draco-primary-btn:hover,
 .draco-secondary-btn:hover,
+.draco-back-btn:hover,
 .draco-bin-btn:hover,
 .draco-promise-btn:hover {
   transform: translateY(-1px);
@@ -469,6 +481,10 @@
 @media (max-width: 640px) {
   .draco-topbar {
     grid-template-columns: 1fr;
+  }
+
+  .draco-back-btn {
+    justify-self: stretch;
   }
 
   .draco-intro-layout {
