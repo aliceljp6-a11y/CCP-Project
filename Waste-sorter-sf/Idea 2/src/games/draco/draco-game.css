@@ -1,0 +1,501 @@
+.draco-shell {
+  position: relative;
+  min-height: 100dvh;
+  padding: 1rem;
+  color: #14532d;
+  background: linear-gradient(145deg, #ecfdf5 0%, #e0f2fe 48%, #f0fdf4 100%);
+  overflow: auto;
+}
+
+.draco-bg-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle at 20% 20%, rgba(134, 239, 172, 0.2), transparent 35%),
+    radial-gradient(circle at 80% 30%, rgba(125, 211, 252, 0.2), transparent 35%),
+    radial-gradient(circle at 40% 80%, rgba(253, 224, 71, 0.14), transparent 40%);
+  animation: dracoFloatBg 8s ease-in-out infinite alternate;
+}
+
+.draco-topbar {
+  position: sticky;
+  top: 0.5rem;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.75rem;
+  margin: 0 auto 1rem;
+  max-width: 1120px;
+}
+
+.draco-pill,
+.draco-health-card,
+.draco-card,
+.draco-item-card,
+.draco-sort-card,
+.draco-end-card,
+.draco-summary-card,
+.draco-panel {
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid rgba(22, 163, 74, 0.18);
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(20, 83, 45, 0.12);
+}
+
+.draco-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 0.9rem;
+  font-size: 1.05rem;
+}
+
+.draco-pill-label {
+  opacity: 0.85;
+}
+
+.draco-health-card {
+  padding: 0.6rem 0.9rem;
+}
+
+.draco-health-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+}
+
+.draco-health-track {
+  margin-top: 0.45rem;
+  width: 100%;
+  height: 0.8rem;
+  border-radius: 999px;
+  background: #dcfce7;
+  overflow: hidden;
+}
+
+.draco-health-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f97316, #22c55e);
+  transition: width 360ms ease;
+}
+
+.draco-health-card p {
+  margin: 0.35rem 0 0;
+  font-size: 0.84rem;
+}
+
+.draco-main {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(210px, 300px) 1fr;
+  margin: 0 auto;
+  max-width: 1120px;
+}
+
+.draco-panel {
+  padding: 1rem;
+  align-self: start;
+  position: sticky;
+  top: 5.65rem;
+}
+
+.draco-avatar-wrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.draco-aura {
+  position: absolute;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(110, 231, 183, 0.58), transparent 70%);
+  filter: blur(1px);
+  animation: dracoAuraPulse 2s ease-in-out infinite;
+}
+
+.draco-avatar {
+  font-size: 2.7rem;
+  position: relative;
+}
+
+.draco-bubble {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 14px;
+  padding: 0.65rem;
+}
+
+.draco-tier-label {
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+}
+
+.draco-bubble p {
+  margin: 0;
+  line-height: 1.35;
+}
+
+.draco-content {
+  min-height: 72dvh;
+}
+
+.draco-card,
+.draco-shop,
+.draco-sort-card,
+.draco-end-card,
+.draco-summary-card {
+  padding: 1rem;
+}
+
+.draco-kicker {
+  margin: 0;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #0369a1;
+  font-weight: 700;
+}
+
+.draco-intro-particles::before,
+.draco-intro-particles::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(74, 222, 128, 0.45);
+  filter: blur(0.4px);
+  animation: dracoParticleDrift 3s ease-in-out infinite alternate;
+}
+
+.draco-intro-particles::before {
+  top: -8px;
+  right: 15%;
+}
+
+.draco-intro-particles::after {
+  top: 8%;
+  left: 12%;
+  animation-delay: 1.2s;
+}
+
+.draco-card h2 {
+  margin: 0.5rem 0 0.3rem;
+  color: #065f46;
+  font-size: clamp(1.5rem, 2.7vw, 2.2rem);
+}
+
+.draco-subtitle {
+  margin: 0 0 0.8rem;
+  color: #334155;
+  font-size: 1.02rem;
+}
+
+.draco-intro-layout {
+  display: grid;
+  gap: 1rem;
+  align-items: start;
+  grid-template-columns: 120px 1fr;
+}
+
+.draco-intro-avatar {
+  border-radius: 999px;
+  background: linear-gradient(145deg, #cffafe, #d9f99d);
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.65);
+}
+
+.draco-intro-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.draco-script p {
+  margin: 0 0 0.45rem;
+  font-size: 1.02rem;
+  line-height: 1.28;
+}
+
+.draco-primary-btn,
+.draco-secondary-btn,
+.draco-back-btn,
+.draco-bin-btn,
+.draco-promise-btn {
+  border: none;
+  border-radius: 12px;
+  padding: 0.72rem 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.draco-primary-btn {
+  margin-top: 0.8rem;
+  background: linear-gradient(120deg, #16a34a, #22c55e);
+  color: white;
+}
+
+.draco-secondary-btn {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.draco-back-btn {
+  align-self: center;
+  justify-self: end;
+  padding: 0.62rem 0.85rem;
+  font-size: 0.9rem;
+  border: 1px solid #cbd5e1;
+  background: #ffffffd9;
+  color: #0f172a;
+}
+
+.draco-primary-btn:hover,
+.draco-secondary-btn:hover,
+.draco-back-btn:hover,
+.draco-bin-btn:hover,
+.draco-promise-btn:hover {
+  transform: translateY(-1px);
+}
+
+.draco-primary-btn:disabled,
+.draco-secondary-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.draco-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 0.75rem;
+}
+
+.draco-item-card {
+  padding: 0.8rem;
+}
+
+.draco-item-card h4,
+.draco-item-card p {
+  margin: 0 0 0.3rem;
+}
+
+.draco-item-emoji {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.draco-item-cost {
+  color: #075985;
+  font-weight: 700;
+}
+
+.draco-item-hint {
+  color: #475569;
+  min-height: 2.3em;
+  font-size: 0.9rem;
+}
+
+.draco-waste-preview {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.7rem;
+  align-items: center;
+  padding: 0.55rem 0.7rem;
+  border-radius: 12px;
+  background: #f0fdfa;
+}
+
+.draco-waste-name {
+  font-weight: 700;
+  margin: 0 0 0.2rem;
+}
+
+.draco-sort-tip {
+  margin: 0.35rem 0 0;
+  font-size: 0.92rem;
+  color: #475569;
+  font-style: italic;
+}
+
+.draco-bin-row {
+  margin-top: 0.8rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(110px, 1fr));
+  gap: 0.55rem;
+}
+
+.draco-bin-btn {
+  background: #ecfeff;
+  border: 2px solid #bae6fd;
+  color: #0f172a;
+  display: grid;
+  gap: 0.2rem;
+  place-items: center;
+}
+
+.draco-feedback {
+  margin: 0.8rem 0 0;
+  font-weight: 600;
+  color: #14532d;
+}
+
+.draco-earth-emoji {
+  margin: 0.4rem 0;
+  font-size: 3rem;
+}
+
+.draco-avatar-image {
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
+}
+
+.draco-end-images {
+  display: flex;
+  justify-content: center;
+  gap: 0.7rem;
+  align-items: center;
+  margin: 0.45rem 0 0.6rem;
+}
+
+.draco-transform-img,
+.draco-earth-img {
+  width: clamp(110px, 20vw, 170px);
+  height: clamp(110px, 20vw, 170px);
+  object-fit: cover;
+  border-radius: 16px;
+  border: 2px solid #bbf7d0;
+  box-shadow: 0 6px 18px rgba(20, 83, 45, 0.14);
+}
+
+.draco-lesson {
+  color: #0f766e;
+  font-weight: 700;
+}
+
+.draco-action-grid {
+  margin: 0.8rem 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
+  gap: 0.65rem;
+}
+
+.draco-action-grid article {
+  border-radius: 12px;
+  border: 1px solid #bbf7d0;
+  background: #f0fdf4;
+  padding: 0.6rem;
+}
+
+.draco-action-grid h4,
+.draco-action-grid p {
+  margin: 0 0 0.3rem;
+}
+
+.draco-promise-wrap {
+  border-top: 1px dashed #86efac;
+  margin-top: 0.8rem;
+  padding-top: 0.65rem;
+}
+
+.draco-promise-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
+  gap: 0.5rem;
+}
+
+.draco-promise-btn {
+  background: #f1f5f9;
+  color: #0f172a;
+  border: 2px solid #cbd5e1;
+}
+
+.draco-promise-btn.is-active {
+  background: #dcfce7;
+  border-color: #22c55e;
+  color: #166534;
+}
+
+.draco-success-line {
+  color: #166534;
+  font-weight: 700;
+  margin: 0.55rem 0 0;
+}
+
+@keyframes dracoFloatBg {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes dracoParticleDrift {
+  from {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateY(-12px);
+    opacity: 0.9;
+  }
+}
+
+@keyframes dracoAuraPulse {
+  0%,
+  100% {
+    transform: scale(0.95);
+    opacity: 0.65;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 900px) {
+  .draco-main {
+    grid-template-columns: 1fr;
+  }
+
+  .draco-panel {
+    position: relative;
+    top: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .draco-topbar {
+    grid-template-columns: 1fr;
+  }
+
+  .draco-back-btn {
+    justify-self: stretch;
+  }
+
+  .draco-intro-layout {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .draco-bin-row,
+  .draco-action-grid,
+  .draco-promise-grid {
+    grid-template-columns: 1fr;
+  }
+}

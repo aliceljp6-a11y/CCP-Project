@@ -2,6 +2,9 @@
 .DS_Store
 Thumbs.db
 
+# Windows shortcuts (point to local paths; not portable)
+*.lnk
+
 # Editor
 .vscode/
 .idea/

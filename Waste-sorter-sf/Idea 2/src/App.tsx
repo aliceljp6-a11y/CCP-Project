@@ -100,15 +100,15 @@ export default function SimulationApp({ onStartTour }: SimulationAppProps) {
       className={`flex h-screen min-h-0 flex-col overflow-hidden bg-gradient-to-br from-amber-50 via-stone-100 to-amber-100 font-sans ${shake ? 'animate-shake' : ''}`}
     >
       <header className="flex-shrink-0 border-b border-stone-200 bg-white/80 shadow-sm backdrop-blur">
-        <div className="mx-auto flex w-full max-w-5xl flex-wrap items-center justify-between gap-4 px-4 py-3 sm:py-4">
+        <div className="mx-auto flex w-full max-w-[1680px] flex-wrap items-center justify-between gap-4 px-4 py-3 sm:px-6 sm:py-4 xl:px-8">
           <div>
-            <h1 className="font-display text-2xl font-bold text-stone-800 sm:text-3xl">
+            <h1 className="font-display text-2xl font-bold text-stone-800 sm:text-3xl xl:text-4xl 2xl:text-5xl">
               Trash Simulation!
             </h1>
-            <p className="mt-0.5 text-sm text-stone-600">
+            <p className="mt-0.5 text-sm text-stone-600 xl:text-base 2xl:text-lg">
               How much waste does San Francisco create in 24 hours?
             </p>
-            <p className="mt-0.5 text-xs font-semibold text-stone-500">
+            <p className="mt-0.5 text-xs font-semibold text-stone-500 xl:text-sm 2xl:text-base">
               SF transfer station: ~1,500 tons per day
             </p>
           </div>
@@ -116,34 +116,34 @@ export default function SimulationApp({ onStartTour }: SimulationAppProps) {
         </div>
       </header>
 
-      <main className="flex min-h-0 flex-1 flex-col overflow-hidden px-2 py-2 sm:px-4 sm:py-3">
-        <div className="mb-2 flex-shrink-0 rounded-xl border-2 border-amber-200 bg-amber-50/80 p-2 shadow-sm sm:rounded-2xl sm:p-3">
+      <main className="mx-auto flex min-h-0 w-full max-w-[1680px] flex-1 flex-col overflow-hidden px-2 py-2 sm:px-6 sm:py-3 xl:px-8">
+        <div className="mb-2 flex-shrink-0 rounded-xl border-2 border-amber-200 bg-amber-50/80 p-2 shadow-sm sm:rounded-2xl sm:p-3 xl:p-4">
           <div className="mb-3 flex flex-wrap items-center justify-center gap-3">
             <button
               type="button"
               onClick={startSimulation}
               disabled={running}
-              className="rounded-xl bg-emerald-600 px-5 py-2.5 font-display font-semibold text-white shadow-md transition hover:bg-emerald-700 disabled:opacity-50 disabled:hover:bg-emerald-600"
+              className="rounded-xl bg-emerald-600 px-5 py-2.5 font-display font-semibold text-white shadow-md transition hover:bg-emerald-700 disabled:opacity-50 disabled:hover:bg-emerald-600 xl:px-6 xl:py-3 xl:text-lg"
             >
               Start Simulation
             </button>
             <button
               type="button"
               onClick={resetSimulation}
-              className="rounded-xl border-2 border-stone-300 bg-white px-5 py-2.5 font-display font-semibold text-stone-700 shadow transition hover:bg-stone-50"
+              className="rounded-xl border-2 border-stone-300 bg-white px-5 py-2.5 font-display font-semibold text-stone-700 shadow transition hover:bg-stone-50 xl:px-6 xl:py-3 xl:text-lg"
             >
               Reset
             </button>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-stone-600">
+          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-stone-600 xl:text-base 2xl:text-lg">
             <span className="flex items-center gap-1.5">
-              <span className="h-4 w-4 rounded-full bg-blue-500" aria-hidden /> Recycling
+              <span className="h-4 w-4 rounded-full bg-blue-500" aria-hidden /> Recycle (bottles/cans)
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="h-4 w-4 rounded-full bg-green-600" aria-hidden /> Compost
+              <span className="h-4 w-4 rounded-full bg-green-600" aria-hidden /> Compost (food scraps)
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="h-4 w-4 rounded-full bg-stone-800" aria-hidden /> Landfill
+              <span className="h-4 w-4 rounded-full bg-stone-800" aria-hidden /> Landfill (diapers/wrappers)
             </span>
           </div>
         </div>
@@ -202,8 +202,6 @@ export default function SimulationApp({ onStartTour }: SimulationAppProps) {
                 <p className="mt-3 text-base text-stone-700 sm:text-lg">
                   Watch 24 hours of San Francisco&apos;s trash fall in real time and see how quickly it
                   piles up. You&apos;ll spot recycling, compost, and landfill materials all mixed together.
-                </p>
-                <p className="mt-2 text-base text-stone-700 sm:text-lg">
                   When the day ends, you&apos;ll discover how much could have been recycled or composted.
                 </p>
                 {/* TODO: Replace this div with a <video> or <iframe> embed when the video is ready */}
@@ -233,8 +231,6 @@ export default function SimulationApp({ onStartTour }: SimulationAppProps) {
                 <p className="mt-3 text-base text-stone-700 sm:text-lg">
                   Watch 24 hours of San Francisco&apos;s trash fall in real time and see how quickly it
                   piles up. You&apos;ll spot recycling, compost, and landfill materials all mixed together.
-                </p>
-                <p className="mt-2 text-base text-stone-700 sm:text-lg">
                   When the day ends, you&apos;ll discover how much could have been recycled or composted.
                 </p>
                 {/* TODO: Replace this div with a <video> or <iframe> embed when the video is ready */}

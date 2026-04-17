@@ -69,10 +69,10 @@ export function EndCard({
             That’s a lot of trash!
           </h2>
           <p className="mt-2 text-sm text-stone-600 sm:text-base">
-            Every day, San Francisco's transfer station receives around 1,500 tons of waste —
-            recycling, compost, and landfill all mixed together. Companies like Recology sort it so
-            more can be recycled instead of going to landfill. The better we sort at home, the more we
-            help.
+            Every day, San Francisco&apos;s transfer station receives around 1,100 tons of waste. The
+            materials come from the grey bins. At Recology, these materials are not sorted, they go
+            straight to the landfill. Materials in the blue and green bin are sorted, so make sure to
+            put the right items in the correct bins.
           </p>
           <p className="mt-2 text-sm font-semibold text-amber-800 sm:text-base">
             Want to learn what goes in each bin and how to reduce waste?
@@ -152,7 +152,7 @@ export function EndCard({
               <p className="font-display text-lg font-extrabold leading-snug text-stone-900 sm:text-xl">
                 <span className="font-display font-extrabold">Fun fact</span>
                 <span className="font-display mt-2 block font-normal">
-                  Each day, the smell from a transfer station is like 1,500 farts trapped in one room
+                  Each day, the smell from a transfer station is like 1,500 rotten tomatoes.
                   <img
                     src={fartCloudUrl}
                     alt=""

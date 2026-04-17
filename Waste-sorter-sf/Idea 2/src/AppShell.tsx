@@ -1,19 +1,6 @@
 import { useCallback, useRef, useState } from 'react'
 import SimulationApp from './App'
-
-function TourAppFrame() {
-  return (
-    <div className="h-screen w-screen bg-white">
-      {/* Tour iframe loads from /public/tour/ — source of truth is CCP Project/
-          Re-copy files there after any CCP Project edits */}
-      <iframe
-        title="Recology Transfer Station Tour"
-        src="./tour/index.html"
-        className="h-full w-full border-0"
-      />
-    </div>
-  )
-}
+import DracoGameShell from './games/draco/DracoGameShell'
 
 type CurtainPhase = 'idle' | 'closing' | 'opening'
 
@@ -45,6 +32,12 @@ export default function AppShell() {
     setCurtainPhase('closing')
   }, [])
 
+  const handleBackToSimulation = useCallback(() => {
+    transitionLockRef.current = false
+    setCurtainPhase('idle')
+    setActiveApp('simulation')
+  }, [])
+
   const showCurtains = curtainPhase === 'closing' || curtainPhase === 'opening'
 
   return (
@@ -52,7 +45,7 @@ export default function AppShell() {
       {activeApp === 'simulation' ? (
         <SimulationApp onStartTour={handleStartTour} />
       ) : (
-        <TourAppFrame />
+        <DracoGameShell onBackToSimulation={handleBackToSimulation} />
       )}
 
       {showCurtains && (
