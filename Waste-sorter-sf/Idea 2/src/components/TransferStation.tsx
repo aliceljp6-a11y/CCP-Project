@@ -731,7 +731,8 @@ export function TransferStation({
       if (w <= 0 || h <= 0) return
       const scaleByWidth = w / STAGE_WIDTH
       const scaleByHeight = h / PIT_HEIGHT
-      const s = Math.min(scaleByWidth, scaleByHeight, 2)
+      // Allow larger displays to upscale further so the scene does not feel tiny.
+      const s = Math.min(scaleByWidth, scaleByHeight, 2.8)
       setScale(Math.max(0.2, s))
     }
     const ro = new ResizeObserver(updateScale)

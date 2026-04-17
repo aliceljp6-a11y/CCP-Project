@@ -9,6 +9,6 @@ export const HEALTH_TIER_LINES: Record<HealthTier, string> = {
 }
 
 export const POST_SORT_LINES = {
-  correct: ['That goes in the right place!', 'Nice sorting!', 'You helped Earth with that choice.'],
+  correct: ['Correct!'],
   incorrect: ['Good try! Let me show the best bin for this one.', 'You are learning. Let us sort it together.'],
 }
