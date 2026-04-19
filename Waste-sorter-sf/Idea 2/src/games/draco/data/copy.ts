@@ -16,14 +16,15 @@ export const INTRO_COPY = {
 
 export const SHOP_COPY = {
   choosePrompt: 'Pick an item to buy with your coins.',
-  sortPrompt: 'Where should this go?',
+  consequencePrompt: 'Here’s what happens next.',
   allCoinsUsed: 'All coins used!',
 }
 
 export const BIN_LABELS = {
-  recycle: { label: 'Recycle', icon: '♻️' },
-  compost: { label: 'Compost', icon: '🍃' },
-  landfill: { label: 'Landfill', icon: '🗑️' },
+  recycle: { label: 'Recycle' },
+  compost: { label: 'Compost' },
+  landfill: { label: 'Landfill' },
+  donate: { label: 'Donate / long-use' },
 }
 
 export const PROMISE_OPTIONS = [

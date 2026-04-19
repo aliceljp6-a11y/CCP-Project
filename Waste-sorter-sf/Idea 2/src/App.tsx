@@ -66,6 +66,21 @@ export default function SimulationApp({ onStartTour }: SimulationAppProps) {
     shakeTriggeredRef.current = { knees: false, waist: false, head: false }
   }, [])
 
+  /** Jump past the timed simulation to the end card (e.g. intro skip or mid-run shortcut). */
+  const skipToResults = useCallback(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
+    }
+    setRunning(false)
+    setCurrentMinutes(END_MINUTES)
+    setShake(false)
+    setShowIntroModal(false)
+    setShowEndPause(false)
+    setShowEndCard(true)
+    shakeTriggeredRef.current = { knees: false, waist: false, head: false }
+  }, [])
+
   useEffect(() => {
     if (prevRunningRef.current && !running && currentMinutes === END_MINUTES) {
       // Enter the end-of-day highlight phase. Do not auto-advance.
@@ -134,6 +149,14 @@ export default function SimulationApp({ onStartTour }: SimulationAppProps) {
             >
               Reset
             </button>
+            <button
+              type="button"
+              onClick={skipToResults}
+              disabled={showEndCard}
+              className="rounded-xl border-2 border-amber-500/80 bg-amber-100 px-5 py-2.5 font-display font-semibold text-amber-950 shadow transition hover:bg-amber-200 disabled:cursor-not-allowed disabled:opacity-50 xl:px-6 xl:py-3 xl:text-lg"
+            >
+              Skip to results
+            </button>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-stone-600 xl:text-base 2xl:text-lg">
             <span className="flex items-center gap-1.5">
@@ -193,6 +216,15 @@ export default function SimulationApp({ onStartTour }: SimulationAppProps) {
                     <span>I&apos;m a student at home</span>
                   </button>
                 </div>
+                <p className="mt-4 text-center">
+                  <button
+                    type="button"
+                    onClick={skipToResults}
+                    className="font-display text-sm font-semibold text-amber-900 underline underline-offset-2 hover:text-amber-950"
+                  >
+                    Skip simulation — go to results
+                  </button>
+                </p>
               </>
             ) : userType === 'guide' ? (
               <>
@@ -220,6 +252,13 @@ export default function SimulationApp({ onStartTour }: SimulationAppProps) {
                     className="rounded-xl bg-emerald-600 px-5 py-3 font-display font-bold text-white shadow-md transition hover:bg-emerald-700"
                   >
                     Start Simulation
+                  </button>
+                  <button
+                    type="button"
+                    onClick={skipToResults}
+                    className="rounded-xl border-2 border-amber-600 bg-amber-100 px-5 py-3 font-display font-semibold text-amber-950 shadow transition hover:bg-amber-200"
+                  >
+                    Skip simulation
                   </button>
                 </div>
               </>
@@ -283,10 +322,17 @@ export default function SimulationApp({ onStartTour }: SimulationAppProps) {
                   </button>
                   <button
                     type="button"
+                    onClick={skipToResults}
+                    className="rounded-xl border-2 border-amber-600 bg-amber-100 px-5 py-3 font-display font-semibold text-amber-950 shadow transition hover:bg-amber-200"
+                  >
+                    Skip simulation
+                  </button>
+                  <button
+                    type="button"
                     onClick={() => setShowIntroModal(false)}
                     className="rounded-xl border-2 border-stone-300 bg-white px-5 py-3 font-display font-semibold text-stone-700 transition hover:bg-stone-50"
                   >
-                    Skip intro
+                    Close intro
                   </button>
                 </div>
               </>

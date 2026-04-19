@@ -1,10 +1,14 @@
 .draco-shell {
   position: relative;
-  min-height: 100dvh;
+  /* Fill AppShell (h-full under #root overflow:hidden) so overflow-y creates a real scrollport */
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
   padding: 1rem;
   color: #14532d;
   background: linear-gradient(145deg, #ecfdf5 0%, #e0f2fe 48%, #f0fdf4 100%);
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .draco-bg-layer {
@@ -40,6 +44,170 @@
   border: 2px solid rgba(22, 163, 74, 0.18);
   border-radius: 18px;
   box-shadow: 0 10px 25px rgba(20, 83, 45, 0.12);
+}
+
+.draco-item-img {
+  width: 100%;
+  max-width: 180px;
+  height: 120px;
+  object-fit: contain;
+  display: block;
+  margin: 0.25rem auto 0.75rem;
+}
+
+.draco-img-placeholder {
+  width: 100%;
+  max-width: 180px;
+  height: 120px;
+  margin: 0.25rem auto 0.75rem;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  border: 2px dashed rgba(22, 163, 74, 0.28);
+  background: rgba(240, 253, 244, 0.7);
+  color: #0f766e;
+  text-align: center;
+  padding: 0.5rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.draco-img-placeholder span {
+  font-size: 0.95rem;
+}
+
+.draco-consequence-title {
+  margin: 0.15rem 0 0.25rem;
+  font-size: 1.55rem;
+  color: #065f46;
+}
+
+.draco-consequence-kicker {
+  margin: 0 0 0.9rem;
+  color: #334155;
+}
+
+.draco-consequence-flow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+  align-items: start;
+  gap: 0.6rem;
+  margin: 0.35rem 0 1rem;
+}
+
+.draco-step {
+  opacity: 0.35;
+  transform: translateY(4px);
+  transition: opacity 260ms ease, transform 260ms ease;
+}
+
+.draco-step-on {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.draco-step-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #0369a1;
+  font-weight: 800;
+  margin-bottom: 0.35rem;
+}
+
+.draco-step-visual {
+  display: grid;
+  place-items: center;
+}
+
+.draco-step-img {
+  width: 100%;
+  max-width: 150px;
+  height: 96px;
+  object-fit: contain;
+  display: block;
+}
+
+.draco-step-text {
+  margin-top: 0.4rem;
+  font-size: 0.95rem;
+  color: #0f172a;
+}
+
+.draco-step-arrow {
+  font-weight: 900;
+  color: rgba(20, 83, 45, 0.45);
+  padding-top: 2.1rem;
+}
+
+.draco-result-pill {
+  padding: 0.55rem 0.75rem;
+  border-radius: 999px;
+  border: 2px solid rgba(2, 132, 199, 0.25);
+  background: rgba(224, 242, 254, 0.7);
+  color: #075985;
+  font-weight: 800;
+}
+
+.draco-result-donate {
+  border-color: rgba(180, 83, 9, 0.35);
+  background: rgba(254, 243, 199, 0.85);
+  color: #92400e;
+}
+
+.draco-waste-secondary {
+  margin: 0.25rem 0 0.9rem;
+  font-size: 0.92rem;
+  color: #475569;
+}
+
+.draco-bin-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.draco-bin-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.65rem;
+  border-radius: 999px;
+  border: 2px solid rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.75);
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.draco-bin-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.draco-bin-chip-recycle {
+  color: #0369a1;
+}
+
+.draco-bin-chip-compost {
+  color: #166534;
+}
+
+.draco-bin-chip-landfill {
+  color: #334155;
+}
+
+.draco-bin-chip-donate {
+  color: #7c2d12;
+}
+
+.draco-bin-chip-active {
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.18);
+  border-color: rgba(34, 197, 94, 0.45);
+  background: rgba(240, 253, 244, 0.9);
 }
 
 .draco-pill {
@@ -363,22 +531,133 @@
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
 }
 
-.draco-end-images {
-  display: flex;
-  justify-content: center;
-  gap: 0.7rem;
-  align-items: center;
-  margin: 0.45rem 0 0.6rem;
+/* End sequence: one visual — Draco layered on Earth, crossfade = same being */
+.draco-end-main-heading {
+  margin: 0.35rem 0 0.25rem;
+  font-size: clamp(1.35rem, 3.2vw, 1.85rem);
+  color: #065f46;
+  line-height: 1.25;
+  text-align: center;
 }
 
-.draco-transform-img,
-.draco-earth-img {
-  width: clamp(110px, 20vw, 170px);
-  height: clamp(110px, 20vw, 170px);
+.draco-end-subtitle {
+  margin: 0 0 0.85rem;
+  text-align: center;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0d9488;
+}
+
+.draco-end-reveal {
+  position: relative;
+  width: min(100%, 280px);
+  aspect-ratio: 1;
+  margin: 0.5rem auto 1rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid rgba(134, 239, 172, 0.65);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.9) inset,
+    0 12px 32px rgba(20, 83, 45, 0.2);
+}
+
+.draco-end-reveal__glow {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(
+    circle at 50% 45%,
+    rgba(253, 224, 71, 0.45) 0%,
+    rgba(167, 243, 208, 0.25) 38%,
+    transparent 65%
+  );
+  z-index: 3;
+  pointer-events: none;
+  animation: dracoEndGlowPulse 4.5s ease-in-out infinite;
+}
+
+.draco-end-reveal__earth {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-radius: 16px;
-  border: 2px solid #bbf7d0;
-  box-shadow: 0 6px 18px rgba(20, 83, 45, 0.14);
+  z-index: 1;
+}
+
+.draco-end-reveal__emoji {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  font-size: clamp(3.5rem, 15vw, 5rem);
+  background: linear-gradient(160deg, #d1fae5, #a7f3d0);
+  z-index: 1;
+}
+
+.draco-end-reveal__draco {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  animation: dracoEndCrossfade 5s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .draco-end-reveal__draco {
+    animation: none;
+    opacity: 0.35;
+  }
+  .draco-end-reveal__glow {
+    animation: none;
+  }
+}
+
+@keyframes dracoEndCrossfade {
+  0% {
+    opacity: 1;
+  }
+  45% {
+    opacity: 0.92;
+  }
+  100% {
+    opacity: 0.08;
+  }
+}
+
+@keyframes dracoEndGlowPulse {
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.draco-end-quote {
+  margin: 0 0 0.65rem;
+  padding: 0.55rem 0.75rem;
+  border-left: 4px solid #34d399;
+  background: rgba(240, 253, 244, 0.85);
+  border-radius: 0 12px 12px 0;
+  font-size: 1.08rem;
+  font-weight: 700;
+  font-style: italic;
+  color: #047857;
+}
+
+.draco-end-draco-line {
+  margin: 0 0 0.5rem;
+  line-height: 1.45;
+  color: #14532d;
+}
+
+.draco-end-lesson {
+  margin-bottom: 0.85rem;
+  line-height: 1.5;
 }
 
 .draco-lesson {

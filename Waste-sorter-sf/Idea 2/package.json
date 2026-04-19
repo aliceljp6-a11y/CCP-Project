@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "sync:tour": "node scripts/sync-tour.cjs",
+    "assets:clean": "node scripts/clean-item-images.cjs",
     "dev": "npm run sync:tour && vite",
     "build": "npm run sync:tour && vite build",
     "preview": "vite preview"

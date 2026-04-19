@@ -8,11 +8,10 @@ import { IntroScreen } from './components/IntroScreen'
 import { ShopScreen } from './components/ShopScreen'
 import { SummaryScreen } from './components/SummaryScreen'
 import { WasteSortingPanel } from './components/WasteSortingPanel'
-import { POST_SORT_LINES } from './data/dracoDialogue'
 import { ENDINGS } from './data/endings'
 import { DRACO_ITEMS } from './data/items'
 import { getHealthTier, HEALTH_TIERS, MAX_HEALTH, START_HEALTH } from './data/healthStates'
-import type { BinType, DracoItem, DracoPhase } from './types'
+import type { DracoItem, DracoPhase } from './types'
 
 const PROMISE_STORAGE_KEY = 'draco-promise-choice'
 
@@ -31,12 +30,13 @@ export default function DracoGameShell({ onBackToSimulation }: DracoGameShellPro
   const [availableItems, setAvailableItems] = useState<DracoItem[]>(DRACO_ITEMS)
   const [currentItem, setCurrentItem] = useState<DracoItem | null>(null)
   const [bubbleText, setBubbleText] = useState("I'm ready when you are!")
-  const [sortResolved, setSortResolved] = useState(false)
-  const [sortFeedback, setSortFeedback] = useState('')
+  const [consequenceStep, setConsequenceStep] = useState(0)
+  const [effectApplied, setEffectApplied] = useState(false)
   const [selectedPromise, setSelectedPromise] = useState<string | null>(null)
 
   const tier = getHealthTier(health)
   const tierLabel = HEALTH_TIERS.find((entry) => entry.tier === tier)?.label ?? 'Critical'
+  const tierDracoImage = HEALTH_TIERS.find((entry) => entry.tier === tier)?.dracoImagePath
   const ending = ENDINGS[tier]
   const noAffordableItems = availableItems.every((item) => item.cost > coins)
 
@@ -74,8 +74,8 @@ export default function DracoGameShell({ onBackToSimulation }: DracoGameShellPro
     setAvailableItems(DRACO_ITEMS)
     setCurrentItem(null)
     setBubbleText("I'm ready when you are!")
-    setSortResolved(false)
-    setSortFeedback('')
+    setConsequenceStep(0)
+    setEffectApplied(false)
     setPhase('intro')
   }
 
@@ -89,38 +89,38 @@ export default function DracoGameShell({ onBackToSimulation }: DracoGameShellPro
     setCoins((prev) => prev - item.cost)
     setAvailableItems((prev) => prev.filter((entry) => entry.id !== item.id))
     setCurrentItem(item)
-    setBubbleText(item.buyLine)
-    if (item.correctBin === 'none') {
-      setSortFeedback(`${item.wasteLine} ${item.rightSortLine}`)
-      setSortResolved(true)
-      setHealth((prev) => clampHealth(prev + item.healthDelta))
-    } else {
-      setSortFeedback(item.wasteLine)
-      setSortResolved(false)
-    }
-    setPhase('sorting')
+    setBubbleText(item.purchaseReaction)
+    setConsequenceStep(0)
+    setEffectApplied(false)
+    setPhase('consequence')
   }
 
-  function applySort(bin: BinType) {
-    if (!currentItem || sortResolved) return
-    const isCorrect = bin === currentItem.correctBin
-    const rightBinName = currentItem.correctBin === 'none' ? 'No bin needed' : currentItem.correctBin
-    const delta = isCorrect ? currentItem.healthDelta : Math.round(currentItem.healthDelta / 2) - 2
-    const nextHealth = clampHealth(health + delta)
-    setHealth(nextHealth)
-    setBubbleText(isCorrect ? currentItem.rightSortLine : currentItem.wrongSortLine)
-    setSortFeedback(
-      `${isCorrect ? POST_SORT_LINES.correct[0] : POST_SORT_LINES.incorrect[0]} ${
-        isCorrect ? '' : `Best answer: ${rightBinName}.`
-      }`,
+  useEffect(() => {
+    if (phase !== 'consequence') return
+    if (!currentItem) return
+
+    const timeouts: number[] = []
+    timeouts.push(window.setTimeout(() => setConsequenceStep(1), 650))
+    timeouts.push(window.setTimeout(() => setConsequenceStep(2), 1350))
+    timeouts.push(window.setTimeout(() => setConsequenceStep(3), 2050))
+    timeouts.push(
+      window.setTimeout(() => {
+        if (effectApplied) return
+        setHealth((prev) => clampHealth(prev + currentItem.dracoEffect))
+        setBubbleText(currentItem.healthReaction)
+        setEffectApplied(true)
+      }, 2300),
     )
-    setSortResolved(true)
-  }
 
-  function continueAfterSort() {
+    return () => {
+      timeouts.forEach((id) => window.clearTimeout(id))
+    }
+  }, [currentItem, effectApplied, phase])
+
+  function continueAfterConsequence() {
     setCurrentItem(null)
-    setSortFeedback('')
-    setSortResolved(false)
+    setConsequenceStep(0)
+    setEffectApplied(false)
     setPhase('shop')
   }
 
@@ -142,18 +142,22 @@ export default function DracoGameShell({ onBackToSimulation }: DracoGameShellPro
 
           {phase === 'shop' && <ShopScreen coins={coins} items={availableItems} onBuy={buyItem} />}
 
-          {phase === 'sorting' && currentItem && (
+          {phase === 'consequence' && currentItem && (
             <WasteSortingPanel
               item={currentItem}
-              health={health}
-              feedback={sortFeedback}
-              isResolved={sortResolved}
-              onSelectBin={applySort}
-              onContinue={continueAfterSort}
+              step={consequenceStep}
+              effectApplied={effectApplied}
+              onContinue={continueAfterConsequence}
             />
           )}
 
-          {phase === 'endSequence' && <EndSequence ending={ending} onContinue={() => setPhase('summary')} />}
+          {phase === 'endSequence' && (
+            <EndSequence
+              ending={ending}
+              dracoImagePath={tierDracoImage}
+              onContinue={() => setPhase('summary')}
+            />
+          )}
 
           {phase === 'summary' && (
             <SummaryScreen

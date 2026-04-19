@@ -1,5 +1,6 @@
 import { SHOP_COPY } from '../data/copy'
 import type { DracoItem } from '../types'
+import { ItemImage } from './ItemImage'
 
 type ShopScreenProps = {
   coins: number
@@ -17,12 +18,10 @@ export function ShopScreen({ coins, items, onBuy }: ShopScreenProps) {
           const cannotAfford = item.cost > coins
           return (
             <article className="draco-item-card" key={item.id}>
-              <p className="draco-item-emoji" aria-hidden>
-                {item.itemEmoji}
-              </p>
+              <ItemImage src={item.itemImage} alt={item.name} className="draco-item-img" placeholderLabel={item.name} />
               <h4>{item.name}</h4>
               <p className="draco-item-cost">{item.cost} coin{item.cost > 1 ? 's' : ''}</p>
-              <p className="draco-item-hint">{item.shortHint}</p>
+              <p className="draco-item-hint">{item.description}</p>
               <button type="button" className="draco-secondary-btn" onClick={() => onBuy(item)} disabled={cannotAfford}>
                 {cannotAfford ? 'Need more coins' : 'Buy item'}
               </button>
