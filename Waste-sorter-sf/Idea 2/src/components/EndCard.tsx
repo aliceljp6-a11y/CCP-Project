@@ -140,7 +140,7 @@ export function EndCard({
             </div>
 
             <section
-              className="flex h-full min-h-0 flex-col rounded-2xl border-2 border-stone-300 bg-gradient-to-br from-amber-50 to-white p-5 shadow-md sm:p-6"
+              className="flex h-full min-h-0 flex-col justify-center rounded-2xl border-2 border-stone-300 bg-gradient-to-br from-amber-50 to-white p-5 shadow-md sm:p-6"
               aria-labelledby="end-card-funfact-heading"
             >
               <h3
