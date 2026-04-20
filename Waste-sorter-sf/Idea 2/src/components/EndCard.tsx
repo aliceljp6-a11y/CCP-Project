@@ -1,7 +1,5 @@
 import React from 'react'
 
-import fartCloudUrl from '../assets/images/fart_cloud.png'
-
 const RECOLOGY_SF_URL = 'https://www.recology.com/recology-san-francisco/'
 
 export type EndCardUserType = 'guide' | 'student'
@@ -23,12 +21,12 @@ const PREDICTION_LABELS: Record<'A' | 'B' | 'C' | 'D', string> = {
 
 function getPredictionMessage(predictionChoice: EndCardProps['predictionChoice']) {
   if (predictionChoice === 'C') {
-    return 'You were right! 🎉 Nearly 50% of what ends up in landfill could have been recycled or composted.'
+    return 'Correct. Nearly 50% of landfill waste could be recycled or composted.'
   }
   if (predictionChoice === 'A' || predictionChoice === 'B' || predictionChoice === 'D') {
-    return 'Surprise! 🤯 Nearly 50% of what ends up in landfill could have been recycled or composted — way more than most people think!'
+    return 'Surprise. Nearly 50% of landfill waste could be recycled or composted.'
   }
-  return 'Did you know? Nearly 50% of landfill waste could have been recycled or composted.'
+  return 'Nearly 50% of landfill waste could be recycled or composted.'
 }
 
 function getPickedSummary(predictionChoice: EndCardProps['predictionChoice']) {
@@ -37,7 +35,7 @@ function getPickedSummary(predictionChoice: EndCardProps['predictionChoice']) {
   }
   const letter = predictionChoice
   const label = PREDICTION_LABELS[letter]
-  return `You picked ${letter}) ${label}.`
+  return `You chose ${letter}) ${label}.`
 }
 
 const TALK_PROMPT =
@@ -63,16 +61,15 @@ export function EndCard({
       aria-labelledby="end-card-title"
       aria-modal="true"
     >
-      <div className="my-auto flex max-h-[90vh] w-full max-w-4xl min-h-0 flex-col overflow-hidden rounded-2xl border-2 border-amber-200 bg-stone-50 shadow-2xl">
+      <div className="my-auto flex max-h-[92vh] w-full max-w-5xl min-h-0 flex-col overflow-hidden rounded-2xl border-2 border-amber-200 bg-stone-50 shadow-2xl">
         <div className="flex-shrink-0 border-b border-amber-100 bg-white px-5 py-4 sm:px-6">
           <h2 id="end-card-title" className="font-display text-2xl font-bold text-stone-800 sm:text-3xl">
             That’s a lot of trash!
           </h2>
           <p className="mt-2 text-sm text-stone-600 sm:text-base">
-            Every day, San Francisco's transfer station receives around 1,500 tons of waste —
-            recycling, compost, and landfill all mixed together. Companies like Recology sort it so
-            more can be recycled instead of going to landfill. The better we sort at home, the more we
-            help.
+            San Francisco&apos;s transfer station receives about 1,100 tons of waste each day, mostly
+            from grey bins. At Recology, that grey-bin waste goes straight to landfill, while blue and
+            green bin materials are sorted.
           </p>
           <p className="mt-2 text-sm font-semibold text-amber-800 sm:text-base">
             Want to learn what goes in each bin and how to reduce waste?
@@ -112,7 +109,7 @@ export function EndCard({
               ) : (
                 <>
                   <section
-                    className="rounded-2xl border-2 border-emerald-200/80 bg-white p-4 shadow-sm sm:p-5"
+                    className="rounded-2xl border-2 border-emerald-200/80 bg-white p-3 shadow-sm sm:p-4"
                     aria-labelledby="end-card-prediction-heading"
                   >
                     <h3
@@ -121,8 +118,8 @@ export function EndCard({
                     >
                       🔮 Your Prediction
                     </h3>
-                    <p className="mt-2 text-sm font-semibold text-stone-800 sm:text-base">{pickedSummary}</p>
-                    <p className="mt-3 rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-sm font-semibold leading-snug text-emerald-900">
+                    <p className="mt-1 text-sm font-semibold text-stone-800 sm:text-base">{pickedSummary}</p>
+                    <p className="mt-2 rounded-xl border border-emerald-200 bg-emerald-50 p-2.5 text-sm font-semibold leading-snug text-emerald-900">
                       {predictionMessage}
                     </p>
                   </section>
@@ -146,27 +143,33 @@ export function EndCard({
               className="flex h-full min-h-0 flex-col rounded-2xl border-2 border-stone-300 bg-gradient-to-br from-amber-50 to-white p-5 shadow-md sm:p-6"
               aria-labelledby="end-card-funfact-heading"
             >
-              <h3 id="end-card-funfact-heading" className="sr-only">
+              <h3
+                id="end-card-funfact-heading"
+                className="font-display text-lg font-extrabold leading-snug text-stone-900 sm:text-xl"
+              >
                 Fun fact
               </h3>
-              <p className="font-display text-lg font-extrabold leading-snug text-stone-900 sm:text-xl">
-                <span className="font-display font-extrabold">Fun fact</span>
-                <span className="font-display mt-2 block font-normal">
-                  Each day, the smell from a transfer station is like 1,500 farts trapped in one room
-                  <img
-                    src={fartCloudUrl}
-                    alt=""
-                    aria-hidden="true"
-                    className="inline-block"
-                    style={{ height: '1em', width: 'auto', verticalAlign: '-0.15em' }}
-                  />
-                </span>
-              </p>
+              <div className="mt-2 flex items-center gap-3">
+                <p className="flex-1 text-base font-semibold leading-snug text-stone-900 sm:text-lg">
+                  Each day, the smell from a transfer station is like 1,500 rotten tomatoes.
+                </p>
+                <video
+                  aria-hidden="true"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  className="h-24 w-36 shrink-0 rounded-lg object-cover"
+                >
+                  <source src="/Rotten_Tomato_Animation_Generated.mp4" type="video/mp4" />
+                </video>
+              </div>
               {!isGuide && onStartTour && (
                 <button
                   type="button"
                   onClick={onStartTour}
-                  className="animate-tour-cta mt-auto w-full rounded-xl bg-emerald-600 px-4 py-3 text-center font-display text-lg font-bold text-white shadow-md transition hover:bg-emerald-700 sm:mt-6"
+                  className="animate-tour-cta mt-4 w-full rounded-xl bg-emerald-600 px-4 py-3 text-center font-display text-lg font-bold text-white shadow-md transition hover:bg-emerald-700"
                 >
                   Go behind the scenes →
                 </button>
@@ -174,27 +177,26 @@ export function EndCard({
             </section>
           </div>
         </div>
-
-        <div className="flex flex-col gap-2 border-t border-stone-200 bg-amber-50/50 p-4 sm:flex-row sm:flex-wrap sm:justify-end">
+        <div className="flex flex-wrap items-center justify-end gap-2 border-t border-stone-200 bg-amber-50/40 px-4 py-3 sm:px-6">
           <a
             href={RECOLOGY_SF_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-xl bg-emerald-600 px-4 py-3 text-center font-display font-semibold text-white shadow-md transition hover:bg-emerald-700 sm:min-w-[10rem]"
+            className="rounded-xl bg-emerald-600 px-4 py-2.5 text-center font-display font-semibold text-white shadow-md transition hover:bg-emerald-700 sm:min-w-[10rem]"
           >
             Learn more at Recology
           </a>
           <button
             type="button"
             onClick={onRunAgain}
-            className="rounded-xl border-2 border-stone-300 bg-white px-4 py-3 font-display font-semibold text-stone-700 transition hover:bg-stone-50 sm:min-w-[10rem]"
+            className="rounded-xl border-2 border-stone-300 bg-white px-4 py-2.5 font-display font-semibold text-stone-700 transition hover:bg-stone-50 sm:min-w-[10rem]"
           >
             Run simulation again
           </button>
           <button
             type="button"
             onClick={onClose}
-            className="rounded-xl px-3 py-2 text-sm text-stone-500 underline underline-offset-2 hover:text-stone-700 sm:border-0 sm:py-3"
+            className="rounded-xl px-2 py-2 text-sm text-stone-500 underline underline-offset-2 hover:text-stone-700"
           >
             Close
           </button>

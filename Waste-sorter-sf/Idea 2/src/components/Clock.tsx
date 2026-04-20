@@ -1,6 +1,6 @@
 import React from 'react'
 
-const REAL_SECONDS_PER_HOUR = 5
+const REAL_SECONDS_PER_HOUR = 3
 
 /** Minutes from midnight: 7:30 AM = 450, 4:00 PM = 960 */
 export const START_MINUTES = 7 * 60 + 30

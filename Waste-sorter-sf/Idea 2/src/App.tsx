@@ -26,6 +26,7 @@ export default function SimulationApp({ onStartTour }: SimulationAppProps) {
   const [showIntroModal, setShowIntroModal] = useState(true)
   const [userType, setUserType] = useState<IntroUserType>(null)
   const [predictionChoice, setPredictionChoice] = useState<PredictionChoice>(null)
+  const [showStudentPrediction, setShowStudentPrediction] = useState(false)
   const shakeTriggeredRef = useRef({ knees: false, waist: false, head: false })
   const prevRunningRef = useRef(false)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
@@ -94,6 +95,12 @@ export default function SimulationApp({ onStartTour }: SimulationAppProps) {
       if (intervalRef.current) clearInterval(intervalRef.current)
     }
   }, [running])
+
+  useEffect(() => {
+    if (!showIntroModal || userType !== 'student') return
+    // Each time the student intro opens, start from the video-first step.
+    setShowStudentPrediction(false)
+  }, [showIntroModal, userType])
 
   return (
     <div
@@ -164,8 +171,8 @@ export default function SimulationApp({ onStartTour }: SimulationAppProps) {
       </main>
 
       {showIntroModal && (
-        <div className="fixed inset-0 z-40 flex items-center justify-center overflow-y-auto bg-black/55 p-4 py-6">
-          <div className="box-border my-auto w-full max-w-2xl min-h-0 max-h-[90vh] overflow-y-auto overscroll-contain animate-intro-card rounded-3xl border-4 border-amber-300 bg-gradient-to-br from-amber-50 to-emerald-50 p-4 shadow-2xl sm:p-6">
+        <div className="fixed inset-0 z-40 flex items-center justify-center overflow-y-auto bg-black/55 p-3 sm:p-4">
+          <div className="box-border my-auto w-full max-w-3xl min-h-0 max-h-[94vh] overflow-y-auto overscroll-contain animate-intro-card rounded-3xl border-4 border-amber-300 bg-gradient-to-br from-amber-50 to-emerald-50 p-4 shadow-2xl sm:p-5">
             {userType === null ? (
               <>
                 <h2 className="font-display text-2xl font-bold text-stone-800 sm:text-3xl">
@@ -234,46 +241,71 @@ export default function SimulationApp({ onStartTour }: SimulationAppProps) {
                   Watch 24 hours of San Francisco&apos;s trash fall in real time and see how quickly it
                   piles up. You&apos;ll spot recycling, compost, and landfill materials all mixed together.
                 </p>
-                <p className="mt-2 text-base text-stone-700 sm:text-lg">
-                  When the day ends, you&apos;ll discover how much could have been recycled or composted.
-                </p>
-                {/* TODO: Replace this div with a <video> or <iframe> embed when the video is ready */}
-                <div className="mt-5 flex min-h-[3.5rem] max-h-[min(11rem,28vh)] w-full min-w-0 shrink items-center justify-center rounded-2xl border-2 border-dashed border-stone-400 bg-stone-200/70 py-3 text-center sm:max-h-[min(11rem,32vh)]">
-                  <p className="min-w-0 px-3 font-display text-xl font-bold text-stone-700">
-                    🎬 Intro video coming soon
-                  </p>
-                </div>
-                <div className="mt-5 min-h-0 min-w-0">
-                  <p className="font-display text-lg font-bold text-stone-800">🤔 Make your prediction!</p>
-                  <p className="mt-1 text-sm text-stone-700 sm:text-base">
-                    Before we start — can you guess how much of SF&apos;s daily trash could have been
-                    recycled or composted instead of going to landfill?
-                  </p>
-                  <div className="mt-3 grid min-h-0 min-w-0 grid-cols-1 gap-3 sm:grid-cols-2">
-                    {[
-                      { id: 'A', label: 'A) About 10%' },
-                      { id: 'B', label: 'B) Around 25%' },
-                      { id: 'C', label: 'C) Nearly 50%' },
-                      { id: 'D', label: 'D) More than 75%' },
-                    ].map((choice) => {
-                      const selected = predictionChoice === choice.id
-                      return (
-                        <button
-                          key={choice.id}
-                          type="button"
-                          onClick={() => setPredictionChoice(choice.id as Exclude<PredictionChoice, null>)}
-                          className={`rounded-2xl border-2 px-4 py-4 text-left font-display text-base transition ${
-                            selected
-                              ? 'scale-[1.02] border-emerald-400 bg-emerald-500 font-bold text-white shadow-lg'
-                              : 'border-stone-600/40 bg-stone-800 text-stone-100 hover:bg-stone-700'
-                          }`}
-                        >
-                          {choice.label}
-                        </button>
-                      )
-                    })}
+                {!showStudentPrediction ? (
+                  <div className="mt-4 min-h-0 min-w-0">
+                    <div className="rounded-2xl border-2 border-dashed border-stone-400 bg-stone-200/70 p-2 sm:p-3">
+                      <video
+                        className="max-h-[34vh] w-full rounded-xl bg-black/20"
+                        controls
+                        playsInline
+                        onEnded={() => setShowStudentPrediction(true)}
+                      >
+                        <source src="/video-intro.MP4" type="video/mp4" />
+                        Your browser does not support this video.
+                      </video>
+                    </div>
+                    <div className="mt-2 flex justify-end">
+                      <button
+                        type="button"
+                        onClick={() => setShowStudentPrediction(true)}
+                        className="rounded-xl border-2 border-stone-300 bg-white px-4 py-2 font-display font-semibold text-stone-700 transition hover:bg-stone-50"
+                      >
+                        Continue to prediction
+                      </button>
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="mt-4 min-h-0 min-w-0">
+                    <div className="mb-1 flex justify-end">
+                      <button
+                        type="button"
+                        onClick={() => setShowStudentPrediction(false)}
+                        className="rounded-lg px-3 py-1.5 text-sm font-semibold text-stone-600 underline underline-offset-2 hover:text-stone-800"
+                      >
+                        ← Back to video
+                      </button>
+                    </div>
+                    <p className="font-display text-lg font-bold text-stone-800">🤔 Make your prediction!</p>
+                    <p className="mt-1 text-sm text-stone-700 sm:text-base">
+                      Before we start — can you guess how much of SF&apos;s daily trash could have been
+                      recycled or composted instead of going to landfill?
+                    </p>
+                    <div className="mt-2 grid min-h-0 min-w-0 grid-cols-1 gap-2.5 sm:grid-cols-2">
+                      {[
+                        { id: 'A', label: 'A) About 10%' },
+                        { id: 'B', label: 'B) Around 25%' },
+                        { id: 'C', label: 'C) Nearly 50%' },
+                        { id: 'D', label: 'D) More than 75%' },
+                      ].map((choice) => {
+                        const selected = predictionChoice === choice.id
+                        return (
+                          <button
+                            key={choice.id}
+                            type="button"
+                            onClick={() => setPredictionChoice(choice.id as Exclude<PredictionChoice, null>)}
+                            className={`rounded-2xl border-2 px-4 py-4 text-left font-display text-base transition ${
+                              selected
+                                ? 'scale-[1.02] border-emerald-400 bg-emerald-500 font-bold text-white shadow-lg'
+                                : 'border-stone-600/40 bg-stone-800 text-stone-100 hover:bg-stone-700'
+                            }`}
+                          >
+                            {choice.label}
+                          </button>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )}
                 <div className="mt-6 flex flex-wrap gap-3">
                   <button
                     type="button"
