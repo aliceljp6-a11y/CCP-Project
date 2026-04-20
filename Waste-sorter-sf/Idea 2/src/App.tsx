@@ -213,11 +213,13 @@ export default function SimulationApp({ onStartTour }: SimulationAppProps) {
                 <p className="mt-2 text-base text-stone-700 sm:text-lg">
                   When the day ends, you&apos;ll discover how much could have been recycled or composted.
                 </p>
-                {/* TODO: Replace this div with a <video> or <iframe> embed when the video is ready */}
-                <div className="mt-5 flex min-h-[3.5rem] max-h-[min(11rem,28vh)] w-full min-w-0 shrink items-center justify-center rounded-2xl border-2 border-dashed border-stone-400 bg-stone-200/70 py-3 text-center sm:max-h-[min(11rem,32vh)]">
-                  <p className="min-w-0 px-3 font-display text-xl font-bold text-stone-700">
-                    🎬 Intro video coming soon
-                  </p>
+                <div className="mt-4 min-h-0 min-w-0">
+                  <div className="rounded-2xl border-2 border-dashed border-stone-400 bg-stone-200/70 p-2 sm:p-3">
+                    <video className="max-h-[34vh] w-full rounded-xl bg-black/20" controls playsInline>
+                      <source src="/video-intro.MP4" type="video/mp4" />
+                      Your browser does not support this video.
+                    </video>
+                  </div>
                 </div>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <button
